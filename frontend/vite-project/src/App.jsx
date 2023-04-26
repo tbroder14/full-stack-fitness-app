@@ -13,8 +13,6 @@ function App() {
     const data = await results.json()
     setExerciseText(data) 
     setButtonDisabled(false)
-    console.log(exerciseText)
-    console.log(data)
   }
   
   return (
