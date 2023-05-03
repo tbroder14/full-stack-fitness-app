@@ -1,32 +1,22 @@
 import { useState } from 'react'
 import './App.css'
-import Navbar from './components/Navbar'
+import BottomButtons from './components/BottomButtons'
+import StartWorkout from './components/StartWorkout'
+import Exercises from './components/Exercises'
+import HistoryPage from './components/HistoryPage'
 
 function App() {
-  const [exerciseText, setExerciseText] = useState([])
-  const [currentDate, setCurrentDate] = useState('')
-  const [buttonDisabled, setButtonDisabled] = useState(false)
 
-  const fetchAPI = async () => {
-    setButtonDisabled(true)
-    const results = await fetch(`http://localhost:3001/get-exercise-for-day?date=${currentDate}`)
-    const data = await results.json()
-    setExerciseText(data) 
-    setButtonDisabled(false)
-  }
+  const [activeTab, setActiveTab] = useState('Start')
+
   
   return (
     <>
-      <Navbar />
-      <div><input type="date" onChange={(e) => setCurrentDate(e.target.value)}/></div>
-      <button className='btn' onClick={fetchAPI} disabled={buttonDisabled}>
-        Fetch Request 
-      </button>
-      <div>
-        {exerciseText.map(exercise => {
-          return <span key={exercise.equipment}>{exercise.equipment}</span>
-        })}
-      </div>
+      {activeTab === 'History' && <HistoryPage />}
+      {activeTab === 'Start' && <StartWorkout />}
+      {activeTab === 'Exercises' && <Exercises />}
+
+      <BottomButtons activeTab={activeTab} setActiveTab={setActiveTab} />
     </>
   )
 }
