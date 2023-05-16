@@ -11,9 +11,9 @@
   ],
   "id": "/?source=pwa",
   "start_url": "https://tb-fitness.netlify.app/",
-  "background_color": "#3367D6",
+  "background_color": "#263c50",
   "display": "standalone",
   "scope": "https://tb-fitness.netlify.app/",
-  "theme_color": "#3367D6",
+  "theme_color": "#263c50",
   "description": "Fitness Application"
 }
