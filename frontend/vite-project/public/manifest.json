@@ -1,0 +1,19 @@
+{
+  "short_name": "Fitness App",
+  "name": "Fitness Application",
+  "icons": [
+    {
+      "src": "assets/dumbbell-icon.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "any"
+    }
+  ],
+  "id": "/?source=pwa",
+  "start_url": "https://tb-fitness.netlify.app/",
+  "background_color": "#3367D6",
+  "display": "standalone",
+  "scope": "https://tb-fitness.netlify.app/",
+  "theme_color": "#3367D6",
+  "description": "Fitness Application"
+}
