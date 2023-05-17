@@ -9,10 +9,10 @@
       "purpose": "any"
     }
   ],
-  "id": "/?source=pwa",
+  "id": "/",
   "start_url": "https://tb-fitness.netlify.app/",
   "background_color": "#263c50",
-  "display": "standalone",
+  "display": "fullscreen",
   "scope": "https://tb-fitness.netlify.app/",
   "theme_color": "#263c50",
   "description": "Fitness Application"
