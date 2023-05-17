@@ -30,7 +30,7 @@ export default function StartWorkout() {
             <div className="flex flex-wrap">
                 {allTemplates.map(template => {
                     return <div className="w-1/2 mb-2">
-                        <div className="rounded-2xl	m-1 bg-neutral shadow-xl max-h-44 h-full overflow-hidden p-3 text-left" key={template.name}>
+                        <div className="card m-1 bg-neutral shadow-xl max-h-44 h-full overflow-hidden py-2 px-3 text-left" key={template.name}>
                             <div className="font-bold text-center underline">{template.name}</div>
                             <div>
                                 {template.listOfExercises.map((exercise, index) => <span key={exercise}>{exercise}{index+1 === template.listOfExercises.length ? '' : ','} </span>)}
