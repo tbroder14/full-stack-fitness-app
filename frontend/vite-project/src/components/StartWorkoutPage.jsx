@@ -1,30 +1,18 @@
 import { useState } from 'react'
 import StartWorkoutButton from "./StartWorkoutButton"
-import EditTemplate from "./EditTemplate"
 import NewTemplate from "./NewTemplate"
+import ShowTemplates from "./ShowTemplates"
+import EditCurrentTemplate from './EditCurrentTemplate'
 
 export default function StartWorkout() {
 
-    const [activePage, setActivePage] = useState('Edit Template')
+    const [activePage, setActivePage] = useState('Show Templates')
     const [showButtons, setShowButtons] = useState(true)
     // let allTemplates = []
     const [allTemplates, setAllTemplates] = useState([])
+    const [currentTemplate, setCurrentTemplate] = useState(null)
+
     
-    function editTemplate() {
-        console.log('edit template function works')
-
-    }
-
-    function newTemplate() {
-        console.log('new template function works')
-
-    }
-
-    function startWorkout() {
-        console.log('start workout function works')
-
-    }
-
     function handleClick(buttonText) {
         setActivePage(buttonText)
         setShowButtons(false)
@@ -34,18 +22,15 @@ export default function StartWorkout() {
         <>
             {activePage === 'New Template' && <NewTemplate setAllTemplates={setAllTemplates} setActivePage={setActivePage} setShowButtons={setShowButtons} />}
             {activePage === 'Start Workout' && <StartWorkoutButton setActivePage={setActivePage} setShowButtons={setShowButtons} />}
-            {activePage === 'Edit Template' && <EditTemplate allTemplates={allTemplates} setShowButtons={setShowButtons}/>}
-            
+            {activePage === 'Show Templates' && <ShowTemplates allTemplates={allTemplates} setActivePage={setActivePage} setShowButtons={setShowButtons} currentTemplate={currentTemplate} setCurrentTemplate={setCurrentTemplate}/>}
+            {activePage === 'Edit Current Template' && <EditCurrentTemplate setActivePage={setActivePage} setAllTemplates={setAllTemplates} setShowButtons={setShowButtons} setCurrentTemplate={setCurrentTemplate} currentTemplate={currentTemplate}/>}
+
             {showButtons && 
                 <>
-                    <button className={`btn  ${activePage === 'New Template' ? 'active' : ''}`} onClick={() => handleClick('New Template')}>New Template</button>
+                    <button className={`btn ${activePage === 'New Template' ? 'active' : ''}`} onClick={() => handleClick('New Template')}>New Template</button>
                     <button className={`btn ${activePage === 'Start Workout' ? 'active' : ''}`} onClick={() => handleClick('Start Workout')}>Start Empty Workout</button>
                 </>    
             }
-
-            {/* <label htmlFor="my-modal-3" className="btn" onClick={startWorkout}>Start Workout</label> */}
-            {/* {activePage === 'Edit Template' ? 'active' : ''} onClick={() => {setActivePage('Edit Template')}} */}
-
         </>
     )
 

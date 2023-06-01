@@ -3,7 +3,7 @@ import { exerciseList } from '../data'
 
 export default function NewTemplate({setActivePage, setShowButtons, setAllTemplates}) {
     function returnToHomePageButton() {
-        setActivePage('Edit Template')
+        setActivePage('Show Templates')
         setShowButtons(true)
     }
     const [templateName, setTemplateName] = useState('')
@@ -23,7 +23,6 @@ export default function NewTemplate({setActivePage, setShowButtons, setAllTempla
 
     function handleForm(e) {
         e.preventDefault() 
-        console.log(selectedExercises)
         const createdTemplate = {
             name: templateName,
             listOfExercises: selectedExercises
@@ -36,10 +35,10 @@ export default function NewTemplate({setActivePage, setShowButtons, setAllTempla
 
     return (
         <>
-            <h1 className="text-3xl">Create a New Template</h1>
+            <h1 className="text-3xl underline underline-offset-8">Create a New Template</h1>
             
                 <form onSubmit={handleForm}>
-                        <div className="form-control">
+                        <div className="form-control" key={templateName}>
                             <label className="label cursor-pointer">
                                 <span className="label-text">Template Name</span> 
                                 <input 
@@ -64,7 +63,7 @@ export default function NewTemplate({setActivePage, setShowButtons, setAllTempla
                             </div>)
                         })}
                        
-                        <input type="submit" value="Submit" className="btn btn-primary my-4"/>
+                        <input type="submit" value="Save Template" className="btn btn-primary my-4"/>
                 </form>
             
            <button className="btn my-4" onClick={() => returnToHomePageButton()}>Cancel New Template</button>

@@ -1,7 +1,7 @@
 export default function StartWorkoutButton({setActivePage, setShowButtons}) {
     
     function returnToHomePageButton() {
-        setActivePage('Edit Template')
+        setActivePage('Show Templates')
         setShowButtons(true)
     }    
 
