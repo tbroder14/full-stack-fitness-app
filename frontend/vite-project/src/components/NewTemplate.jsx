@@ -53,12 +53,16 @@ export default function NewTemplate({setActivePage, setShowButtons, setAllTempla
                                 />
                             </label>
                         </div>
-                        {exerciseList.map(exercise => {
+                        {exerciseList.map((exercise, index) => {
                             return(
-                            <div className="form-control" key={exercise}>
+                            <div className="form-control" key={index}>
                                 <label className="label cursor-pointer">
                                     <span className="label-text">{exercise}</span> 
-                                    <input type="checkbox" className="checkbox" value={exercise} onChange={updateSelectedExercises}/>
+                                    <input 
+                                        type="checkbox" 
+                                        className="checkbox" 
+                                        value={exercise} 
+                                        onChange={updateSelectedExercises}/>
                                 </label>
                             </div>)
                         })}

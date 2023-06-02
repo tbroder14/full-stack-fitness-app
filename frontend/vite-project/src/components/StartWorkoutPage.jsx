@@ -9,7 +9,11 @@ export default function StartWorkout() {
     const [activePage, setActivePage] = useState('Show Templates')
     const [showButtons, setShowButtons] = useState(true)
     // let allTemplates = []
-    const [allTemplates, setAllTemplates] = useState([])
+    const tempTemp = {
+        name: 'Workout #1',
+        listOfExercises: ['Barbell Bench Press', 'Barbell Squat']
+    }
+    const [allTemplates, setAllTemplates] = useState([tempTemp])
     const [currentTemplate, setCurrentTemplate] = useState(null)
 
     
@@ -23,7 +27,7 @@ export default function StartWorkout() {
             {activePage === 'New Template' && <NewTemplate setAllTemplates={setAllTemplates} setActivePage={setActivePage} setShowButtons={setShowButtons} />}
             {activePage === 'Start Workout' && <StartWorkoutButton setActivePage={setActivePage} setShowButtons={setShowButtons} />}
             {activePage === 'Show Templates' && <ShowTemplates allTemplates={allTemplates} setActivePage={setActivePage} setShowButtons={setShowButtons} currentTemplate={currentTemplate} setCurrentTemplate={setCurrentTemplate}/>}
-            {activePage === 'Edit Current Template' && <EditCurrentTemplate setActivePage={setActivePage} setAllTemplates={setAllTemplates} setShowButtons={setShowButtons} setCurrentTemplate={setCurrentTemplate} currentTemplate={currentTemplate}/>}
+            {activePage === 'Edit Current Template' && <EditCurrentTemplate setActivePage={setActivePage} allTemplates={allTemplates} setAllTemplates={setAllTemplates} setShowButtons={setShowButtons} setCurrentTemplate={setCurrentTemplate} currentTemplate={currentTemplate}/>}
 
             {showButtons && 
                 <>

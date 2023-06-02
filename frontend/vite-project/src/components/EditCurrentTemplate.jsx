@@ -1,41 +1,49 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { exerciseList } from '../data'
 
-export default function EditCurrentTemplate({setActivePage, setShowButtons, setAllTemplates, currentTemplate, setCurrentTemplate}) {
-    function returnToHomePageButton() {
-        setActivePage('Show Templates')
+export default function EditCurrentTemplate({setActivePage, setShowButtons, allTemplates, setAllTemplates, currentTemplate, setCurrentTemplate}) {
+    
+    const [index, setIndex] = useState(allTemplates.indexOf(currentTemplate))
+    const [templateName, setTemplateName] = useState({name: currentTemplate.name})
+    let tempAllTemplates
+    let tempCurrentTemplate
+
+    useEffect(() => { 
+        tempAllTemplates = allTemplates
+        tempCurrentTemplate = tempAllTemplates[index]
+    }, []); 
+
+    function returnToCurrentTemplate() {
+        setCurrentTemplate(tempCurrentTemplate) 
         setShowButtons(false)
+        setActivePage('Show Templates')     
     }
     
-    const [templateName, setTemplateName] = useState({name: currentTemplate.name})
-
     const updateName = (e) => {
-        console.log(e.target.value)
         setTemplateName(({templateName, [e.target.name]: e.target.value }))
     }
 
-    function selectedExercises(e) {
-        // console.log(e)
-        // if (selectedExercises.includes(e.target.value)) {
-        //     selectedExercises = selectedExercises.filter(exercise => exercise !== e.target.value)
-        // } else {
-        //     selectedExercises.push(e.target.value)
-        // }
-    }
-    
-    function handleForm(e) {
-        e.preventDefault() 
-        
-        const createdTemplate = {
-            name: templateName.name,
-            listOfExercises: selectedExercises
+    const selectedExercises = (e) => {
+        if (currentTemplate.listOfExercises.includes(e.target.value)) {
+            currentTemplate.listOfExercises = currentTemplate.listOfExercises.filter((exercise) => e.target.value !== exercise)
+        } else {
+            currentTemplate.listOfExercises.push(e.target.value)
         }
-        console.log(createdTemplate)
-        
-        // setAllTemplates(prevState => [...prevState, createdTemplate])
-        // setTemplateName('')
-        // selectedExercises = []
-        
+        const updatedTemplate = {
+            name: currentTemplate.name,
+            listOfExercises: currentTemplate.listOfExercises
+        }
+        // setting state to rerender page, so checkboxes work 
+        setCurrentTemplate(updatedTemplate)
+    }
+
+    function submitButton(e) {
+        e.preventDefault() 
+        // update respective template in allTemplates
+
+        tempCurrentTemplate = currentTemplate
+        tempAllTemplates[index] = tempCurrentTemplate
+        setAllTemplates(tempAllTemplates)
         returnToHomePageButton()
     }
 
@@ -43,7 +51,7 @@ export default function EditCurrentTemplate({setActivePage, setShowButtons, setA
         <>
             <h1 className="text-3xl underline underline-offset-8">Update Template</h1>
             
-                <form onSubmit={handleForm}>
+                <form onSubmit={submitButton}>
                         <div className="form-control" key={templateName}>
                             <label className="label cursor-pointer">
                                 <span className="label-text">Template Name</span> 
@@ -71,7 +79,7 @@ export default function EditCurrentTemplate({setActivePage, setShowButtons, setA
                                         className="checkbox" 
                                         value={exercise} 
                                         checked={currentTemplate.listOfExercises.includes(exercise)}
-                                        onChange={() => selectedExercises}
+                                        onChange={selectedExercises}
                                     />
                                 </label>
                             </div>)
@@ -80,7 +88,7 @@ export default function EditCurrentTemplate({setActivePage, setShowButtons, setA
                         <input type="submit" value="Update Template" className="btn btn-primary my-4"/>
                 </form>
             
-           <button className="btn my-4" onClick={() => returnToHomePageButton()}>Stop Updating Template</button>
+           <button className="btn my-4" onClick={() => returnToCurrentTemplate()}>Stop Updating Template</button>
         </>
     )
 }
