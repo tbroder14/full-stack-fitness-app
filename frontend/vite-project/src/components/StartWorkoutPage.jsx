@@ -4,16 +4,12 @@ import NewTemplate from "./NewTemplate"
 import ShowTemplates from "./ShowTemplates"
 import EditCurrentTemplate from './EditCurrentTemplate'
 
-export default function StartWorkout() {
+export default function StartWorkout({allTemplates, setAllTemplates}) {
 
     const [activePage, setActivePage] = useState('Show Templates')
     const [showButtons, setShowButtons] = useState(true)
     // let allTemplates = []
-    const tempTemp = {
-        name: 'Workout #1',
-        listOfExercises: ['Barbell Bench Press', 'Barbell Squat']
-    }
-    const [allTemplates, setAllTemplates] = useState([tempTemp])
+    
     const [currentTemplate, setCurrentTemplate] = useState(null)
 
     
