@@ -38,7 +38,7 @@ export default function NewTemplate({setActivePage, setShowButtons, setAllTempla
             <h1 className="text-3xl underline underline-offset-8">Create a New Template</h1>
             
                 <form onSubmit={handleForm}>
-                        <div className="form-control" key={templateName}>
+                        <div className="form-control">
                             <label className="label cursor-pointer">
                                 <span className="label-text">Template Name</span> 
                                 <input 
