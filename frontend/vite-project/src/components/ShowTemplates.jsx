@@ -1,6 +1,4 @@
-import { useState } from "react"
-
-export default function ShowTemplates({setActivePage, setShowButtons, currentTemplate, setCurrentTemplate, allTemplates}) {
+export default function ShowTemplates({setActivePage, setShowButtons, currentTemplate, setCurrentTemplate, allTemplates, setCurrentWorkoutExercises}) {
     
     function showCurrentTemplate(template) {
         setCurrentTemplate(template)
@@ -15,6 +13,11 @@ export default function ShowTemplates({setActivePage, setShowButtons, currentTem
     function returnToTemplate() {
         setCurrentTemplate(null)
         setShowButtons(true)
+    }
+
+    function activeWorkout() {
+        setCurrentWorkoutExercises(currentTemplate.listOfExercises)
+        setActivePage('Active Workout')
     }
 
     return(
@@ -42,6 +45,7 @@ export default function ShowTemplates({setActivePage, setShowButtons, currentTem
                     <ul className="list-disc text-left p-6">
                     {currentTemplate.listOfExercises.map((exercise, index) => <li className="list-disc" key={index}>{exercise}</li>)}
                     </ul>
+                    <button className="btn" onClick={activeWorkout} >Start {currentTemplate.name}</button>
                     <button className={`btn  ${setActivePage === 'Edit Current Template' ? 'active' : ''}`} onClick={() => handleClick('Edit Current Template')}>Edit Template</button>
                     <button className="btn" onClick={() => returnToTemplate()}>Return to Templates</button>
                 </>
