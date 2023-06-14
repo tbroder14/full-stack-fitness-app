@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { exerciseList } from '../data'
+import  exerciseList from '../data'
 
 export default function AddExercisePage({setActivePage, setCurrentWorkoutExercises, setCurrentTemplate, currentWorkoutExercises}) {
     
@@ -32,12 +32,12 @@ export default function AddExercisePage({setActivePage, setCurrentWorkoutExercis
                     return(
                     <div className="form-control" key={index}>
                         <label className="label cursor-pointer">
-                            <span className="label-text">{exercise}</span> 
+                            <span className="label-text">{exercise.name}</span> 
                             <input 
                                 type="checkbox" 
                                 className="checkbox" 
-                                value={exercise} 
-                                checked={activeExercises.includes(exercise)}
+                                value={exercise.name} 
+                                checked={activeExercises.includes(exercise.name)}
                                 onChange={selectedExercises}/>
                         </label>
                     </div>)

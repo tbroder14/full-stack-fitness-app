@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { exerciseList } from '../data'
+import exerciseList from '../data'
 
 export default function NewTemplate({setActivePage, setShowButtons, setAllTemplates}) {
     function returnToHomePageButton() {
@@ -57,11 +57,11 @@ export default function NewTemplate({setActivePage, setShowButtons, setAllTempla
                             return(
                             <div className="form-control" key={index}>
                                 <label className="label cursor-pointer">
-                                    <span className="label-text">{exercise}</span> 
+                                    <span className="label-text">{exercise.name}</span> 
                                     <input 
                                         type="checkbox" 
                                         className="checkbox" 
-                                        value={exercise} 
+                                        value={exercise.name} 
                                         onChange={updateSelectedExercises}/>
                                 </label>
                             </div>)

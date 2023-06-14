@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { exerciseList } from '../data'
+import exerciseList from '../data'
 
 export default function EditCurrentTemplate({setActivePage, setShowButtons, allTemplates, setAllTemplates, currentTemplate, setCurrentTemplate}) {
     
@@ -75,14 +75,14 @@ export default function EditCurrentTemplate({setActivePage, setShowButtons, allT
 
                         {exerciseList.map(exercise => {
                             return(
-                            <div className="form-control" key={exercise}>
+                            <div className="form-control" key={exercise.name}>
                                 <label className="label cursor-pointer">
-                                    <span className="label-text">{exercise}</span> 
+                                    <span className="label-text">{exercise.name}</span> 
                                     <input 
                                         type="checkbox" 
                                         className="checkbox" 
-                                        value={exercise} 
-                                        checked={activeExercises.includes(exercise)}
+                                        value={exercise.name} 
+                                        checked={activeExercises.includes(exercise.name)}
                                         onChange={selectedExercises}
                                     />
                                 </label>
