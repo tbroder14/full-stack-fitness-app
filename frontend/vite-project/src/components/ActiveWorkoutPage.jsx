@@ -44,6 +44,10 @@ export default function ActiveWorkoutPage({setActivePage, setShowButtons, curren
         console.log('this workout would be saved')
     }
 
+    function addSet(){
+
+    }
+
     function returnToHomePageButton() {
         setCurrentWorkoutExercises([])
         setCurrentTemplate(null)
@@ -77,13 +81,46 @@ export default function ActiveWorkoutPage({setActivePage, setShowButtons, curren
                     </>                    
                 
                 }
+            </div>
+            <div>
                 {currentWorkoutExercises &&
                     <>
-                        <ul className="list-disc text-left pl-5 py-2">
-                            {currentWorkoutExercises.map((exercise, index) => <li className="list-disc" key={index}>{exercise}</li>)}
-                        </ul>
+                        <div className="p-2">
+                            <div></div>
+                            {currentWorkoutExercises.map((exercise, index) => <div key={index}>{exercise}
+                                <>
+                                    <table className="w-full text-center mb-1">
+                                        <thead>
+                                        <tr className="text-center bold h-1 m-2">
+                                            <th className="mx-2">Set</th>
+                                            <th>Previous</th>
+                                            <th>lbs</th>
+                                            <th>Reps</th>
+                                            <th>CM</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <td className="bg-black rounded-lg">1</td>
+                                            <td>140x8</td>
+                                            <td className="bg-black rounded-lg">50</td>
+                                            <td className="bg-black rounded-lg">8</td>
+                                            <td>CM</td>
+                                        </tr>   
+                                        <tr>
+                                             <td colSpan="5">
+                                                <button className="btn w-full h-2/4">Add Set</button>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </>
+                            </div>    
+                            )}
+                        </div>
                     </>    
                 }
+               
             </div>
             <button className="btn m-2" onClick={addExercises}>Add Exercises</button>
             <button className="btn btn-primary m-2" onClick={finishWorkout}>Finish Workout</button>

@@ -20,8 +20,10 @@ const exerciseList = [
 
 export default exerciseList
 
-// export all exercises from db
+// structure data to updated format 
+// add reps/sets/weight to templates and empty workout 
 // button to create new exercises
 // user auth
 // create scheme for history/workout page
 // create hamburger/three dots = daisyui dropdown 
+
