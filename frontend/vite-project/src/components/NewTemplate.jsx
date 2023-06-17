@@ -60,8 +60,8 @@ export default function NewTemplate({setActivePage, setShowButtons, setAllTempla
                         </div>
                         {exerciseList.map((exercise, index) => {
                             return(
-                            <div className="form-control" key={index}>
-                                <label className="label cursor-pointer">
+                            <div className="form-control my-2 grid h-14 card bg-base-300 px-2" key={index}>
+                                <label className="label cursor-pointer ">
                                     <span className="label-text">{exercise.name}</span> 
                                     <input 
                                         type="checkbox" 

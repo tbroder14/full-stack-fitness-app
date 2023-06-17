@@ -75,17 +75,18 @@ export default function EditCurrentTemplate({setActivePage, setShowButtons, allT
 
                         {exerciseList.map(exercise => {
                             return(
-                            <div className="form-control" key={exercise.name}>
+                            <div className="form-control my-2 grid h-14 card bg-base-300 px-2" key={exercise.name}>
                                 <label className="label cursor-pointer">
                                     <span className="label-text">{exercise.name}</span> 
                                     <input 
                                         type="checkbox" 
                                         className="checkbox" 
-                                        value={exercise.name} 
+                                        value={exercise.name}                                
                                         checked={activeExercises.includes(exercise.name)}
                                         onChange={selectedExercises}
                                     />
                                 </label>
+                                
                             </div>)
                         })}
                        
