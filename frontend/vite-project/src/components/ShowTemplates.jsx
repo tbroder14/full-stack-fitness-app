@@ -24,7 +24,7 @@ export default function ShowTemplates({setActivePage, setShowButtons, currentTem
         <>
             {currentTemplate === null &&
                 <>
-                    <h2 className="text-4xl text-left mt-5 mb-3">Templates</h2>
+                    <h2 className="text-4xl text-center mt-5 mb-3">TEMPLATES</h2>
                     <div className="flex flex-wrap">
                     {allTemplates.map((template, index) => {
                         return <div key={index} className="w-1/2 mb-2">
@@ -45,9 +45,9 @@ export default function ShowTemplates({setActivePage, setShowButtons, currentTem
                     <ul className="list-disc text-left p-6">
                     {currentTemplate.listOfExercises.map((exercise, index) => <li className="list-disc" key={index}>{exercise}</li>)}
                     </ul>
-                    <button className="btn" onClick={activeWorkout} >Start {currentTemplate.name}</button>
-                    <button className={`btn  ${setActivePage === 'Edit Current Template' ? 'active' : ''}`} onClick={() => handleClick('Edit Current Template')}>Edit Template</button>
-                    <button className="btn" onClick={() => returnToTemplate()}>Return to Templates</button>
+                    <button className="btn m-2" onClick={activeWorkout} >Start {currentTemplate.name}</button>
+                    <button className={`btn m-2  ${setActivePage === 'Edit Current Template' ? 'active' : ''}`} onClick={() => handleClick('Edit Current Template')}>Edit Template</button>
+                    <button className="btn mt-2 mb-20" onClick={() => returnToTemplate()}>Return to Templates</button>
                 </>
             }
         </>

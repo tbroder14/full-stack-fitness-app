@@ -27,8 +27,8 @@ export default function StartWorkout({allTemplates, setAllTemplates}) {
 
             {showButtons && 
                 <>
-                    <button className={`btn ${activePage === 'New Template' ? 'active' : ''}`} onClick={() => handleClick('New Template')}>New Template</button>
-                    <button className={`btn ${activePage === 'Active Workout' ? 'active' : ''}`} onClick={() => handleClick('Active Workout')}>Start Empty Workout</button>
+                    <button className={`btn mx-1 my-2 ${activePage === 'New Template' ? 'active' : ''}`} onClick={() => handleClick('New Template')}>New Template</button>
+                    <button className={`btn mx-1 my-2 ${activePage === 'Active Workout' ? 'active' : ''}`} onClick={() => handleClick('Active Workout')}>Start Empty Workout</button>
                 </>    
             }
         </>

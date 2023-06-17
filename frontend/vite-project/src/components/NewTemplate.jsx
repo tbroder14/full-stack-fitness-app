@@ -35,8 +35,13 @@ export default function NewTemplate({setActivePage, setShowButtons, setAllTempla
 
     return (
         <>
-            <h1 className="text-3xl underline underline-offset-8">Create a New Template</h1>
-            
+            <div className="flex justify-between content-center">
+                <button className="btn btn-square" onClick={() => returnToHomePageButton()}>
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" /></svg>
+                </button>
+                <h1 className="text-3xl underline-offset-8 self-center">NEW TEMPLATE</h1>
+                <div className="btn" type="submit" value="Save Template">Save</div>
+            </div>          
                 <form onSubmit={handleForm}>
                         <div className="form-control">
                             <label className="label cursor-pointer">
@@ -66,11 +71,12 @@ export default function NewTemplate({setActivePage, setShowButtons, setAllTempla
                                 </label>
                             </div>)
                         })}
-                       
-                        <input type="submit" value="Save Template" className="btn btn-primary my-4"/>
+                        <button className="btn m-2" onClick>Add Exercises</button>
+                        <input type="submit" value="Save Template" className="btn btn-primary my-2"/>
                 </form>
             
-           <button className="btn my-4" onClick={() => returnToHomePageButton()}>Cancel New Template</button>
+
+           <button className="btn mt-2 mb-20" onClick={() => returnToHomePageButton()}>Cancel New Template</button>
         </>
     )
 }

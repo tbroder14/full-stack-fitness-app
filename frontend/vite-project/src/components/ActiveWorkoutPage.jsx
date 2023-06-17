@@ -57,8 +57,13 @@ export default function ActiveWorkoutPage({setActivePage, setShowButtons, curren
 
     return (
         <>
-            <h1 className="text-4xl">Active Workout</h1>
-
+            <div className="flex justify-between content-center">
+                <button className="btn btn-square" onClick={() => returnToHomePageButton()}>
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" /></svg>
+                </button>
+                <h1 className="text-2xl self-center">ACTIVE WORKOUT</h1>
+                <div className="btn" type="submit" value="Save Template">Save</div>
+            </div>
             <div className="form-control">
                 <label className="label cursor-pointer">
                     <span className="label-text">Workout Name</span> 
@@ -85,38 +90,36 @@ export default function ActiveWorkoutPage({setActivePage, setShowButtons, curren
             <div>
                 {currentWorkoutExercises &&
                     <>
-                        <div className="p-2">
-                            <div></div>
-                            {currentWorkoutExercises.map((exercise, index) => <div key={index}>{exercise}
+                        <div className="p-1">
+                            {currentWorkoutExercises.map((exercise, index) => <div className="text-left my-2 font-bold" key={index}>{exercise}
                                 <>
-                                    <table className="w-full text-center mb-1">
+                                    <table className="w-full text-center mb-2 border-spacing-8">
                                         <thead>
-                                        <tr className="text-center bold h-1 m-2">
-                                            <th className="mx-2">Set</th>
-                                            <th>Previous</th>
-                                            <th>lbs</th>
-                                            <th>Reps</th>
-                                            <th>CM</th>
-                                        </tr>
+                                            <tr className="text-center bold">
+                                                <th>Set</th>
+                                                <th>Previous</th>
+                                                <th>lbs</th>
+                                                <th>Reps</th>
+                                                <th>CM</th>
+                                            </tr>
                                         </thead>
                                         <tbody>
-                                        <tr>
-                                            <td className="bg-black rounded-lg">1</td>
-                                            <td>140x8</td>
-                                            <td className="bg-black rounded-lg">50</td>
-                                            <td className="bg-black rounded-lg">8</td>
-                                            <td>CM</td>
-                                        </tr>   
-                                        <tr>
-                                             <td colSpan="5">
-                                                <button className="btn w-full h-2/4">Add Set</button>
-                                            </td>
-                                        </tr>
+                                            <tr>
+                                                <td className="bg-black rounded-lg m-1 border-spacing-x-1">1</td>
+                                                <td>140x8</td>
+                                                <td className="bg-black rounded-lg m-1 ml-2">50</td>
+                                                <td className="bg-black rounded-lg m-1">8</td>
+                                                <td>CM</td>
+                                            </tr>   
+                                            <tr className="h-2">
+                                                <td colSpan="5">
+                                                    <button className="btn w-full h-1">Add Set</button>
+                                                </td>
+                                            </tr>
                                         </tbody>
                                     </table>
                                 </>
-                            </div>    
-                            )}
+                            </div>)}
                         </div>
                     </>    
                 }
@@ -124,7 +127,7 @@ export default function ActiveWorkoutPage({setActivePage, setShowButtons, curren
             </div>
             <button className="btn m-2" onClick={addExercises}>Add Exercises</button>
             <button className="btn btn-primary m-2" onClick={finishWorkout}>Finish Workout</button>
-            <button className="btn btn-secondary my-2" onClick={() => returnToHomePageButton()}>Cancel Workout</button>
+            <button className="btn btn-secondary mt-2 mb-20" onClick={() => returnToHomePageButton()}>Cancel Workout</button>
 
         </>
     )
