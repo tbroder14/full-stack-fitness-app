@@ -93,7 +93,7 @@ export default function EditCurrentTemplate({setActivePage, setShowButtons, allT
                 </form>
             
             <button className="btn my-2" onClick={() => returnToCurrentTemplate()}>Stop Updating Template</button>
-            <button className="btn btn-secondary my-2" onClick={() => deleteCurrentTemplate()}>Delete Template</button>
+            <button className="btn btn-secondary mt-2 mb-20" onClick={() => deleteCurrentTemplate()}>Delete Template</button>
         </>
     )
 }
