@@ -11,6 +11,7 @@ export default function StartWorkout({allTemplates, setAllTemplates}) {
     const [showButtons, setShowButtons] = useState(true)    
     const [currentTemplate, setCurrentTemplate] = useState(null)
     const [currentWorkoutExercises, setCurrentWorkoutExercises] = useState([])
+    const [originalPageForExercises, setOriginalPageForExercises] = useState(null)
 
     function handleClick(buttonText) {
         setActivePage(buttonText)
@@ -19,11 +20,11 @@ export default function StartWorkout({allTemplates, setAllTemplates}) {
 
     return(
         <>
-            {activePage === 'New Template' && <NewTemplate setAllTemplates={setAllTemplates} setActivePage={setActivePage} setShowButtons={setShowButtons} />}
+            {activePage === 'New Template' && <NewTemplate setAllTemplates={setAllTemplates} setActivePage={setActivePage} setShowButtons={setShowButtons} setOriginalPageForExercises={setOriginalPageForExercises} currentWorkoutExercises={currentWorkoutExercises} setCurrentWorkoutExercises={setCurrentWorkoutExercises}/>}
             {activePage === 'Show Templates' && <ShowTemplates allTemplates={allTemplates} setActivePage={setActivePage} setShowButtons={setShowButtons} currentTemplate={currentTemplate} setCurrentTemplate={setCurrentTemplate} setCurrentWorkoutExercises={setCurrentWorkoutExercises}/>}
-            {activePage === 'Edit Current Template' && <EditCurrentTemplate setActivePage={setActivePage} allTemplates={allTemplates} setAllTemplates={setAllTemplates} setShowButtons={setShowButtons} setCurrentTemplate={setCurrentTemplate} currentTemplate={currentTemplate}/>}
-            {activePage === 'Active Workout' && <ActiveWorkoutPage setActivePage={setActivePage} setShowButtons={setShowButtons} currentWorkoutExercises={currentWorkoutExercises} setCurrentWorkoutExercises={setCurrentWorkoutExercises} currentTemplate={currentTemplate} setCurrentTemplate={setCurrentTemplate}/>}
-            {activePage === 'Add Exercises' && <AddExercisePage setActivePage={setActivePage} currentWorkoutExercises={currentWorkoutExercises} setCurrentWorkoutExercises={setCurrentWorkoutExercises}/>}
+            {activePage === 'Edit Current Template' && <EditCurrentTemplate setActivePage={setActivePage} allTemplates={allTemplates} setAllTemplates={setAllTemplates} setShowButtons={setShowButtons} setCurrentTemplate={setCurrentTemplate} currentTemplate={currentTemplate} setOriginalPageForExercises={setOriginalPageForExercises} currentWorkoutExercises={currentWorkoutExercises} setCurrentWorkoutExercises={setCurrentWorkoutExercises}/>}
+            {activePage === 'Active Workout' && <ActiveWorkoutPage setActivePage={setActivePage} setShowButtons={setShowButtons} currentWorkoutExercises={currentWorkoutExercises} setCurrentWorkoutExercises={setCurrentWorkoutExercises} currentTemplate={currentTemplate} setCurrentTemplate={setCurrentTemplate} setOriginalPageForExercises={setOriginalPageForExercises} />}
+            {activePage === 'Add Exercises' && <AddExercisePage setActivePage={setActivePage} currentWorkoutExercises={currentWorkoutExercises} setCurrentWorkoutExercises={setCurrentWorkoutExercises} originalPageForExercises={originalPageForExercises} setOriginalPageForExercises={setOriginalPageForExercises} />}
 
             {showButtons && 
                 <>
