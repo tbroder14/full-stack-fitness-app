@@ -1,7 +1,8 @@
 export default function Exercises() {
     return(
-        <>
-             <h1>This is the exercises page</h1>
+        <> 
+            <div className="flex text-6xl text-center mt-5 mb-3 tracking-wide justify-center items-center">WE'RE PREGNANT!</div>
+                
         </>
     )
 
