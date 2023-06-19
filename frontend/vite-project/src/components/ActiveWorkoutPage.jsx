@@ -62,7 +62,7 @@ export default function ActiveWorkoutPage({setActivePage, setShowButtons, curren
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" /></svg>
                 </button>
                 <h1 className="text-2xl self-center">ACTIVE WORKOUT</h1>
-                <div className="btn" type="submit" value="Save Template">Save</div>
+                <div className="btn h-6 w-16" type="submit" value="Save Template">Save</div>
             </div>
             <div className="form-control">
                 <label className="label cursor-pointer">
@@ -91,7 +91,7 @@ export default function ActiveWorkoutPage({setActivePage, setShowButtons, curren
                         <div className="p-1">
                             {currentWorkoutExercises.map((exercise, index) => <div className="text-left mt-3 font-bold" key={index}>{exercise}
                                 <>
-                                    <table className="w-full text-center mb-2 border-separate border-spacing-2">
+                                    <table className="w-full text-center border-separate border-spacing-2">
                                         <thead>
                                             <tr className="text-center">
                                                 <th>Set</th>
@@ -111,13 +111,13 @@ export default function ActiveWorkoutPage({setActivePage, setShowButtons, curren
                                             </tr>   
                                             <tr>
                                                 <td colSpan="5">
-                                                    <button className="btn w-full mb-2">Add Set</button>
+                                                    <button className="btn w-full mt-1 mb-2">Add Set</button>
                                                 </td>
                                             </tr>
                                         </tbody>
                                     </table>
                                 </>
-                                <hr className="border-b-2 border-black" />
+                                <hr className="border-b border-black" />
                             </div>)}
                             
                         </div>
@@ -125,8 +125,8 @@ export default function ActiveWorkoutPage({setActivePage, setShowButtons, curren
                 }
                
             </div>
-            <button className="btn m-2" onClick={addExercises}>Add Exercises</button>
-            <button className="btn btn-primary m-2" onClick={finishWorkout}>Finish Workout</button>
+            <button className="btn m-4" onClick={addExercises}>Add Exercises</button>
+            <button className="btn btn-primary m-4" onClick={finishWorkout}>Finish Workout</button>
             <button className="btn btn-secondary mt-2 mb-20" onClick={() => returnToHomePageButton()}>Cancel Workout</button>
 
         </>
