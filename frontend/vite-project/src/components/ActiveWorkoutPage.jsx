@@ -82,44 +82,44 @@ export default function ActiveWorkoutPage({setActivePage, setShowButtons, curren
             <div>
                 {currentWorkoutExercises == [] &&
                     <>
-
                     </>                    
-                
                 }
             </div>
             <div>
                 {currentWorkoutExercises &&
                     <>
                         <div className="p-1">
-                            {currentWorkoutExercises.map((exercise, index) => <div className="text-left my-2 font-bold" key={index}>{exercise}
+                            {currentWorkoutExercises.map((exercise, index) => <div className="text-left mt-3 font-bold" key={index}>{exercise}
                                 <>
-                                    <table className="w-full text-center mb-2 border-spacing-8">
+                                    <table className="w-full text-center mb-2 border-separate border-spacing-2">
                                         <thead>
-                                            <tr className="text-center bold">
+                                            <tr className="text-center">
                                                 <th>Set</th>
                                                 <th>Previous</th>
-                                                <th>lbs</th>
+                                                <th className="w-16">lbs</th>
                                                 <th>Reps</th>
                                                 <th>CM</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr>
-                                                <td className="bg-black rounded-lg m-1 border-spacing-x-1">1</td>
-                                                <td>140x8</td>
-                                                <td className="bg-black rounded-lg m-1 ml-2">50</td>
-                                                <td className="bg-black rounded-lg m-1">8</td>
+                                                <td className="bg-black rounded-lg">1</td>
+                                                <td className="mx-8">140x8</td>
+                                                <td className="bg-black rounded-lg">50</td>
+                                                <td className="bg-black rounded-lg">8</td>
                                                 <td>CM</td>
                                             </tr>   
-                                            <tr className="h-2">
+                                            <tr>
                                                 <td colSpan="5">
-                                                    <button className="btn w-full h-1">Add Set</button>
+                                                    <button className="btn w-full mb-2">Add Set</button>
                                                 </td>
                                             </tr>
                                         </tbody>
                                     </table>
                                 </>
+                                <hr className="border-b-2 border-black" />
                             </div>)}
+                            
                         </div>
                     </>    
                 }
