@@ -8,8 +8,17 @@ export default function ActiveWorkoutPage({setActivePage, setShowButtons, curren
     // when starting template workout, allow for workout name to be changed after adding exercises
     // when starting template workout, update added exercises  
 
+    // const [activeWorkoutData, setActiveWorkoutData] = {
+    //     date:"5/14/2012",
+    //     exerciseName:"One-Arm Dumbbell Row",
+    //     workoutName:"",
+    //     equipment:"",
+    //     set:[
+    //         {"weight":"50","reps":"8","distance":"0","seconds":"0","notes":""},
+    //         {"weight":"50","reps":"8","distance":"0","seconds":"0","notes":""}]
+    // }
+    
     const startOfWorkoutTime = new Date().getHours()
-    const finishedWorkout = ''
     let currentWorkoutName = ''
     
     if (currentTemplate === null) {
@@ -31,21 +40,14 @@ export default function ActiveWorkoutPage({setActivePage, setShowButtons, curren
     }
 
     const [workoutName, setWorkoutName] = useState(currentWorkoutName)
-   
     function updateName(e) {
         setWorkoutName(e.target.value)
     }
 
-    function addExercises() {
-        setActivePage('Add Exercises')
-    }
+    function addExercises() {setActivePage('Add Exercises')}
 
     function finishWorkout() {
         console.log('this workout would be saved')
-    }
-
-    function addSet(){
-
     }
 
     function returnToHomePageButton() {
@@ -53,6 +55,11 @@ export default function ActiveWorkoutPage({setActivePage, setShowButtons, curren
         setCurrentTemplate(null)
         setActivePage('Show Templates')
         setShowButtons(true) 
+    }
+
+    function addSet (e) {
+        e.preventDefault()
+        console.log('add new set') 
     }
 
     return (
@@ -87,48 +94,62 @@ export default function ActiveWorkoutPage({setActivePage, setShowButtons, curren
             </div>
             <div>
                 {currentWorkoutExercises &&
-                    <>
-                        <div className="p-1">
-                            {currentWorkoutExercises.map((exercise, index) => <div className="text-left mt-3 font-bold" key={index}>{exercise}
-                                <>
-                                    <table className="w-full text-center border-separate border-spacing-2">
-                                        <thead>
-                                            <tr className="text-center">
-                                                <th>Set</th>
-                                                <th>Previous</th>
-                                                <th className="w-16">lbs</th>
-                                                <th>Reps</th>
-                                                <th>CM</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td className="bg-black rounded-lg">1</td>
-                                                <td className="mx-8">140x8</td>
-                                                <td className="bg-black rounded-lg">50</td>
-                                                <td className="bg-black rounded-lg">8</td>
-                                                <td>CM</td>
-                                            </tr>   
-                                            <tr>
-                                                <td colSpan="5">
-                                                    <button className="btn w-full mt-1 mb-2">Add Set</button>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </>
-                                <hr className="border-b border-black" />
-                            </div>)}
-                            
-                        </div>
-                    </>    
+                    <div className="p-1">
+                        {currentWorkoutExercises.map((exercise, index) => <div className="text-left mt-3 font-bold" key={index}>{exercise}
+                            <form>
+                                
+                                <table className="w-full text-center border-separate border-spacing-2">
+                                    <thead>
+                                        <tr className="text-center">
+                                            <th>Set</th>
+                                            <th>Previous</th>
+                                            <th className="w-16 m-0">lbs</th>
+                                            <th>Reps</th>
+                                            <th>CM</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr className="">
+                                            <td className="bg-black rounded-lg h-8">1</td>
+                                            <td className="mx-8 h-8 w-28">140x8</td>
+                                            <td>
+                                                <input 
+                                                    type="text" 
+                                                    name="Name" 
+                                                    id="Name" 
+                                                    placeholder='50'
+                                                    // value='50'
+                                                    className="input bg-black rounded-lg w-16 text-center h-8"
+                                                />
+                                        </td>
+                                            <td>
+                                                <input 
+                                                    type="text" 
+                                                    name="Name" 
+                                                    id="Name" 
+                                                    placeholder='50'
+                                                    // value='50'
+                                                    className="input bg-black rounded-lg w-16 text-center h-8"
+                                                />
+                                            </td>
+                                            <td>CM</td>
+                                        </tr>   
+                                        <tr>
+                                            <td colSpan="5">
+                                                <button className="btn w-full mt-1 mb-2" onClick={addSet}>Add Set</button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </form>
+                            <hr className="border-b border-black" />
+                        </div>)}
+                    </div>    
                 }
-               
             </div>
             <button className="btn m-4" onClick={addExercises}>Add Exercises</button>
             <button className="btn btn-primary m-4" onClick={finishWorkout}>Finish Workout</button>
             <button className="btn btn-secondary mt-2 mb-20" onClick={() => returnToHomePageButton()}>Cancel Workout</button>
-
         </>
     )
 }

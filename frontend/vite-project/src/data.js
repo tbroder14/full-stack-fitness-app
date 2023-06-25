@@ -100,10 +100,24 @@ const exerciseList = [
 
 export default exerciseList.sort((a, b) => a.name.localeCompare(b.name))
 
-// structure data to updated format 
-// add reps/sets/weight to templates and empty workout 
-// button to create new exercises
+
+//              start workout tab
+// make reps/weight editable and increase sets by one when add set is pushed 
+// make 'add set' button work  
+// add notes to workout 
+// fix "add exercises" button on "edit template" page 
+// get muscle/equipment dropdowns to work properly 
+// get search bar to work
+// fix sticky top (if possible on desktop)
+// format data for when workout is saved//in a format that can be used for the history page 
+// create hamburger/three dots on templates to edit template = daisyui dropdown 
+
+//              exercises page 
+// map over exercise list for exercises page 
+// when exercise is clicked, pop up new page for specific exercise 
+
+//              history page
+// express netlify video 
 // user auth
-// create scheme for history/workout page
-// create hamburger/three dots = daisyui dropdown 
+
 
