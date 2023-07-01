@@ -1,23 +1,39 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
-export default function ActiveWorkoutPage({setActivePage, setShowButtons, currentTemplate, setCurrentTemplate, currentWorkoutExercises, setCurrentWorkoutExercises}) {
+export default function ActiveWorkoutPage({setActivePage, setShowButtons, currentTemplate, setCurrentTemplate, currentWorkoutExercises, setCurrentWorkoutExercises, activeWorkoutData, setActiveWorkoutData, workoutData, setWorkoutData}) {
 
     // start timer 
     // how to delete an exercise from a workout? hamburger button/three dots for menu? 
     // save button - posts workout to database; then resets current workout template/array to original
     // when starting template workout, allow for workout name to be changed after adding exercises
-    // when starting template workout, update added exercises  
+    // when starting template workout, update added exercises
 
-    // const [activeWorkoutData, setActiveWorkoutData] = {
-    //     date:"5/14/2012",
-    //     exerciseName:"One-Arm Dumbbell Row",
-    //     workoutName:"",
-    //     equipment:"",
-    //     set:[
-    //         {"weight":"50","reps":"8","distance":"0","seconds":"0","notes":""},
-    //         {"weight":"50","reps":"8","distance":"0","seconds":"0","notes":""}]
-    // }
-    
+    useEffect(() => {
+        // Compare workoutData and currentWorkoutExercises to add missing exercises
+        const updatedWorkoutData = currentWorkoutExercises.reduce((acc, exercise) => {
+        const exerciseExists = workoutData.some((item) => item.name === exercise);
+
+        if (!exerciseExists) {
+            const newExercise = {
+            name: exercise,
+            sets: [
+                { weight: '50', reps: '10', distance: '0', seconds: '0', notes: '' },
+                { weight: '60', reps: '8', distance: '0', seconds: '0', notes: '' },
+            ],
+            };
+            return [...acc, newExercise];
+        }
+
+        return acc;
+    }, workoutData);
+
+        const finalWorkoutData = updatedWorkoutData.filter((item) =>
+        currentWorkoutExercises.includes(item.name)
+        );
+
+        setWorkoutData(finalWorkoutData);
+    }, [currentWorkoutExercises]);
+
     const startOfWorkoutTime = new Date().getHours()
     let currentWorkoutName = ''
     
@@ -44,22 +60,53 @@ export default function ActiveWorkoutPage({setActivePage, setShowButtons, curren
         setWorkoutName(e.target.value)
     }
 
-    function addExercises() {setActivePage('Add Exercises')}
+    function addExercises() {
+        setActiveWorkoutData(workoutData)
+        setActivePage('Add Exercises')}
+
+    function updateWeight() {
+
+    }
+
+    function updateReps() {
+
+    }
+
+    const addSet = (exercise, event) => {
+        event.preventDefault();
+
+        setWorkoutData((prevData) => {
+            // console.log(prevData)
+            const updatedData = prevData.map((e) => {
+                if (exercise === e.name) {
+                    const updatedNestedArray = [...e.sets, { weight:"60", reps:"8", distance:"0", seconds:"0", notes:"" }];
+                    return { ...e, sets: updatedNestedArray };
+                }
+                return e;
+            });
+            return updatedData;
+        });
+    };
 
     function finishWorkout() {
         console.log('this workout would be saved')
+        // {
+        // date:"5/14/2012",
+        // exerciseName:"One-Arm Dumbbell Row",
+        // workoutName:"",
+        // equipment:"",
+        // set:[
+        //     {weight:"50", reps:"10", distance:"0", seconds:"0", notes:""},
+        //     {weight:"60", reps:"8", distance:"0", seconds:"0", notes:""}]
+        // }
     }
 
     function returnToHomePageButton() {
+        setActiveWorkoutData([])
         setCurrentWorkoutExercises([])
         setCurrentTemplate(null)
         setActivePage('Show Templates')
         setShowButtons(true) 
-    }
-
-    function addSet (e) {
-        e.preventDefault()
-        console.log('add new set') 
     }
 
     return (
@@ -93,11 +140,10 @@ export default function ActiveWorkoutPage({setActivePage, setShowButtons, curren
                 }
             </div>
             <div>
-                {currentWorkoutExercises &&
+                {workoutData &&
                     <div className="p-1">
-                        {currentWorkoutExercises.map((exercise, index) => <div className="text-left mt-3 font-bold" key={index}>{exercise}
+                        {workoutData.map((exercise, index) => <div className="text-left mt-3 font-bold" key={index}>{exercise.name}
                             <form>
-                                
                                 <table className="w-full text-center border-separate border-spacing-2">
                                     <thead>
                                         <tr className="text-center">
@@ -109,43 +155,44 @@ export default function ActiveWorkoutPage({setActivePage, setShowButtons, curren
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr className="">
-                                            <td className="bg-black rounded-lg h-8">1</td>
+                                        {exercise.sets.map((row, index) =>
+                                        <tr key={index}>
+                                            <td className="bg-black rounded-lg h-8">{index+1}</td>
                                             <td className="mx-8 h-8 w-28">140x8</td>
                                             <td>
                                                 <input 
                                                     type="text" 
-                                                    name="Name" 
-                                                    id="Name" 
-                                                    placeholder='50'
+                                                    name="Weight" 
+                                                    id="weight" 
+                                                    placeholder={row.weight}
                                                     // value='50'
                                                     className="input bg-black rounded-lg w-16 text-center h-8"
-                                                />
-                                        </td>
+                                                    // onChange={updateWeight}
+                                                /></td>
                                             <td>
                                                 <input 
                                                     type="text" 
-                                                    name="Name" 
-                                                    id="Name" 
-                                                    placeholder='50'
+                                                    name="Reps" 
+                                                    id="reps" 
+                                                    placeholder={row.reps}
                                                     // value='50'
                                                     className="input bg-black rounded-lg w-16 text-center h-8"
-                                                />
-                                            </td>
+                                                    // onChange={updateReps}
+                                                /></td>
                                             <td>CM</td>
-                                        </tr>   
+                                        </tr> 
+                                        )}  
                                         <tr>
                                             <td colSpan="5">
-                                                <button className="btn w-full mt-1 mb-2" onClick={addSet}>Add Set</button>
+                                                <button className="btn w-full mt-1 mb-2" onClick={(event) => addSet(exercise.name, event)}>Add Set</button>
                                             </td>
                                         </tr>
                                     </tbody>
-                                </table>
+                                </table>   
                             </form>
-                            <hr className="border-b border-black" />
-                        </div>)}
-                    </div>    
-                }
+                        <hr className="border-b border-black"/>
+                    </div>)}
+                </div>}
             </div>
             <button className="btn m-4" onClick={addExercises}>Add Exercises</button>
             <button className="btn btn-primary m-4" onClick={finishWorkout}>Finish Workout</button>

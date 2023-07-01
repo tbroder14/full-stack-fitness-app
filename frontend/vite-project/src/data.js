@@ -102,8 +102,6 @@ export default exerciseList.sort((a, b) => a.name.localeCompare(b.name))
 
 
 //              start workout tab
-// make reps/weight editable and increase sets by one when add set is pushed 
-// make 'add set' button work  
 // add notes to workout 
 // fix "add exercises" button on "edit template" page 
 // get muscle/equipment dropdowns to work properly 
