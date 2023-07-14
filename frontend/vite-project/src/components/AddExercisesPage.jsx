@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import  exerciseList from '../data'
+import { muscle, equipment, sortedExerciseList } from '../data';
 
 export default function AddExercisePage({setActivePage, setCurrentWorkoutExercises, setOriginalPageForExercises, currentWorkoutExercises, originalPageForExercises}) {
     
@@ -52,22 +52,28 @@ export default function AddExercisePage({setActivePage, setCurrentWorkoutExercis
                     <details className="dropdown w-full">
                         <summary tabIndex={0} className="btn my-2 w-full">Muscle</summary>
                         <ul tabIndex={0} className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
-                            <li><a>Item 1</a></li>
-                            <li><a>Item 2</a></li>
+                            {muscle.map((muscle) => {
+                                return (
+                                    <li><a>{muscle}</a></li>
+                                )
+                            })}
                         </ul>
                     </details>
                     <details className="dropdown w-full">
                         <summary tabIndex={0} className="btn my-2 w-full">Equipment</summary>
                         <ul tabIndex={0} className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
-                            <li><a>Item 1</a></li>
-                            <li><a>Item 2</a></li>
+                            {equipment.map((equipment) => {
+                                return (
+                                    <li><a>{equipment}</a></li>
+                                )
+                            })}
                         </ul>
                     </details>
                 </div>
             </div>
             <form  onSubmit={handleForm}>
                               
-                {exerciseList.map((exercise, index) => {
+                {sortedExerciseList.map((exercise, index) => {
                     return(
                     <div className="form-control my-2 grid h-16 card bg-base-300 px-2" key={index}>
                         <label className="label cursor-pointer">

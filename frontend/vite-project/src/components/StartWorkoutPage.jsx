@@ -15,7 +15,6 @@ export default function StartWorkout({allTemplates, setAllTemplates}) {
     const [activeWorkoutData, setActiveWorkoutData] = useState([])
     const [workoutData, setWorkoutData] = useState([])
 
-
     function handleClick(buttonText) {
         setActivePage(buttonText)
         setShowButtons(false)

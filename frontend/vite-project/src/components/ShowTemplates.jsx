@@ -20,6 +20,10 @@ export default function ShowTemplates({setActivePage, setShowButtons, currentTem
         setActivePage('Active Workout')
     }
 
+    function editTemplate() {
+        console.log('this should be a dropdown')
+    }
+
     return(
         <>
             {currentTemplate === null &&
@@ -29,7 +33,7 @@ export default function ShowTemplates({setActivePage, setShowButtons, currentTem
                     {allTemplates.map((template, index) => {
                         return <div key={index} className="w-1/2 mb-2">
                             <div className="card m-1 bg-neutral shadow-xl max-h-44 h-full overflow-hidden py-2 px-3 text-left" key={template.name} onClick={() => showCurrentTemplate(template)}>
-                                <div className="font-bold text-center underline">{template.name}</div>
+                                <span><div className="font-bold text-center underline mb-2">{template.name}<button className="btn btn-primary ml-2" onClick>...</button></div></span>
                                 <div>
                                     {template.listOfExercises.map((exercise, index) => <span key={index}>{exercise}{index+1 === template.listOfExercises.length ? '' : ','} </span>)}
                                 </div>

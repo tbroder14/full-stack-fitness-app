@@ -1,5 +1,5 @@
 import { useState } from "react"
-import exerciseList from '../data'
+// import { muscle, equipment, sortedExerciseList } from '../data';
 
 export default function NewTemplate({setActivePage, setShowButtons, setAllTemplates, setOriginalPageForExercises, currentWorkoutExercises, setCurrentWorkoutExercises}) {
     function returnToHomePageButton() {

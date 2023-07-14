@@ -9,7 +9,6 @@ export default function ActiveWorkoutPage({setActivePage, setShowButtons, curren
     // when starting template workout, update added exercises
 
     useEffect(() => {
-        // Compare workoutData and currentWorkoutExercises to add missing exercises
         const updatedWorkoutData = currentWorkoutExercises.reduce((acc, exercise) => {
         const exerciseExists = workoutData.some((item) => item.name === exercise);
 
@@ -19,8 +18,7 @@ export default function ActiveWorkoutPage({setActivePage, setShowButtons, curren
             sets: [
                 { weight: '50', reps: '10', distance: '0', seconds: '0', notes: '' },
                 { weight: '60', reps: '8', distance: '0', seconds: '0', notes: '' },
-            ],
-            };
+            ],};
             return [...acc, newExercise];
         }
 
@@ -62,7 +60,16 @@ export default function ActiveWorkoutPage({setActivePage, setShowButtons, curren
 
     function addExercises() {
         setActiveWorkoutData(workoutData)
-        setActivePage('Add Exercises')}
+        setActivePage('Add Exercises')
+    }
+
+    function addNote() {
+        console.log('add note')
+    }
+
+    function deleteExercise() {
+        console.log('delete exercise')
+    }
 
     function updateWeight() {
 
@@ -76,7 +83,6 @@ export default function ActiveWorkoutPage({setActivePage, setShowButtons, curren
         event.preventDefault();
 
         setWorkoutData((prevData) => {
-            // console.log(prevData)
             const updatedData = prevData.map((e) => {
                 if (exercise === e.name) {
                     const updatedNestedArray = [...e.sets, { weight:"60", reps:"8", distance:"0", seconds:"0", notes:"" }];
@@ -142,54 +148,70 @@ export default function ActiveWorkoutPage({setActivePage, setShowButtons, curren
             <div>
                 {workoutData &&
                     <div className="p-1">
-                        {workoutData.map((exercise, index) => <div className="text-left mt-3 font-bold" key={index}>{exercise.name}
-                            <form>
-                                <table className="w-full text-center border-separate border-spacing-2">
-                                    <thead>
-                                        <tr className="text-center">
-                                            <th>Set</th>
-                                            <th>Previous</th>
-                                            <th className="w-16 m-0">lbs</th>
-                                            <th>Reps</th>
-                                            <th>CM</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {exercise.sets.map((row, index) =>
-                                        <tr key={index}>
-                                            <td className="bg-black rounded-lg h-8">{index+1}</td>
-                                            <td className="mx-8 h-8 w-28">140x8</td>
-                                            <td>
-                                                <input 
-                                                    type="text" 
-                                                    name="Weight" 
-                                                    id="weight" 
-                                                    placeholder={row.weight}
-                                                    // value='50'
-                                                    className="input bg-black rounded-lg w-16 text-center h-8"
-                                                    // onChange={updateWeight}
-                                                /></td>
-                                            <td>
-                                                <input 
-                                                    type="text" 
-                                                    name="Reps" 
-                                                    id="reps" 
-                                                    placeholder={row.reps}
-                                                    // value='50'
-                                                    className="input bg-black rounded-lg w-16 text-center h-8"
-                                                    // onChange={updateReps}
-                                                /></td>
-                                            <td>CM</td>
-                                        </tr> 
-                                        )}  
-                                        <tr>
-                                            <td colSpan="5">
-                                                <button className="btn w-full mt-1 mb-2" onClick={(event) => addSet(exercise.name, event)}>Add Set</button>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>   
-                            </form>
+                        {workoutData.map((exercise, index) => 
+                        <div className="text-left mt-3 font-bold" key={index}>
+                            <div className='text-lg'> {exercise.name}
+                            <span>
+                                <details className="dropdown">
+                                    <summary className="ml-2 btn font-bold">...</summary>
+                                    <ul className="p-2 shadow menu dropdown-content bg-neutral rounded-box w-52">
+                                        <li>
+                                            <button onClick={addNote} className="w-full text-left text-base">Add Note</button>
+                                        </li>
+                                        <li>
+                                            <button onClick={deleteExercise} className="w-full text-left text-base">Delete Exercise</button>
+                                        </li>
+                                    </ul>
+                                </details>
+                            </span>
+                        </div>
+                        <form>
+                            <table className="w-full text-center border-separate border-spacing-2">
+                                <thead>
+                                    <tr className="text-center">
+                                        <th>Set</th>
+                                        <th>Previous</th>
+                                        <th className="w-16 m-0">lbs</th>
+                                        <th>Reps</th>
+                                        <th>CM</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {exercise.sets.map((row, index) =>
+                                    <tr key={index}>
+                                        <td className="bg-black rounded-lg h-8">{index+1}</td>
+                                        <td className="mx-8 h-8 w-28">140x8</td>
+                                        <td>
+                                            <input 
+                                                type="text" 
+                                                name="Weight" 
+                                                id="weight" 
+                                                placeholder={row.weight}
+                                                // value='50'
+                                                className="input bg-black rounded-lg w-16 text-center h-8"
+                                                // onChange={updateWeight}
+                                            /></td>
+                                        <td>
+                                            <input 
+                                                type="text" 
+                                                name="Reps" 
+                                                id="reps" 
+                                                placeholder={row.reps}
+                                                // value='50'
+                                                className="input bg-black rounded-lg w-16 text-center h-8"
+                                                // onChange={updateReps}
+                                            /></td>
+                                        <td>CM</td>
+                                    </tr> 
+                                    )}  
+                                    <tr>
+                                        <td colSpan="5">
+                                            <button className="btn w-full mt-1 mb-2" onClick={(event) => addSet(exercise.name, event)}>Add Set</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>   
+                        </form>
                         <hr className="border-b border-black"/>
                     </div>)}
                 </div>}

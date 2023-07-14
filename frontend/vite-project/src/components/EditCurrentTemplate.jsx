@@ -1,9 +1,9 @@
 import { useState } from "react"
-import exerciseList from '../data'
+// import { muscle, equipment, sortedExerciseList } from '../data';
 
 export default function EditCurrentTemplate({setActivePage, setShowButtons, allTemplates, setAllTemplates, currentTemplate, setCurrentTemplate, currentWorkoutExercises, setOriginalPageForExercises, setCurrentWorkoutExercises}) {
     
-    // setCurrentWorkoutExercises(currentTemplate.listOfExercises)
+    setCurrentWorkoutExercises(currentTemplate.listOfExercises)
     const [activeExercises, setActiveExercises] = useState(currentTemplate.listOfExercises)
     const [templateName, setTemplateName] = useState(currentTemplate.name)        
     const index = allTemplates.indexOf(currentTemplate)
@@ -17,16 +17,16 @@ export default function EditCurrentTemplate({setActivePage, setShowButtons, allT
         setTemplateName(e.target.value)
     }
 
-    // const selectedExercises = (e) => {
-    //     if (activeExercises.includes(e.target.value)) {
-    //         const arrayCopy = [...activeExercises]
-    //         const newIndex = activeExercises.indexOf(e.target.value)
-    //         arrayCopy.splice(newIndex, 1)
-    //         setActiveExercises(arrayCopy)
-    //     } else {
-    //         setActiveExercises(prevState => [...prevState, e.target.value])
-    //     }
-    // }
+    const selectedExercises = (e) => {
+        if (activeExercises.includes(e.target.value)) {
+            const arrayCopy = [...activeExercises]
+            const newIndex = activeExercises.indexOf(e.target.value)
+            arrayCopy.splice(newIndex, 1)
+            setActiveExercises(arrayCopy)
+        } else {
+            setActiveExercises(prevState => [...prevState, e.target.value])
+        }
+    }
 
     function deleteCurrentTemplate() {
         if (confirm('Are you sure you want to delete this template?')) {
@@ -81,32 +81,15 @@ export default function EditCurrentTemplate({setActivePage, setShowButtons, allT
                             </label>
                         </div>
 
-                        {currentWorkoutExercises.map((exercise, index) => {
+                        {activeExercises.map((exercise, index) => {
                             return <ul className="list-disc text-left ml-5 my-2">
-                                <li className="list-disc" key={index}>{exercise}</li>
+                                <li className="list-disc" key={index} onChange={selectedExercises}>{exercise}</li>
                             </ul>
                         })}
 
                         
                         <button className="btn m-2" onClick={addExercises}>Add Exercises</button>
 
-                        {/* {exerciseList.map(exercise => {
-                            return(
-                            <div className="form-control my-2 grid h-14 card bg-base-300 px-2" key={exercise.name}>
-                                <label className="label cursor-pointer">
-                                    <span className="label-text">{exercise.name}</span> 
-                                    <input 
-                                        type="checkbox" 
-                                        className="checkbox" 
-                                        value={exercise.name}                                
-                                        checked={activeExercises.includes(exercise.name)}
-                                        onChange={selectedExercises}
-                                    />
-                                </label>
-                                
-                            </div>)
-                        })} */}
-                       
                         <input type="submit" value="Update Template" className="btn btn-primary my-2"/>
                 </form>
             

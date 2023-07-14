@@ -1,5 +1,5 @@
-// const muscle = ['hamstrings', 'quadriceps', 'biceps', 'triceps', 'glutes', 'chest', 'core', 'quadriceps', 'back', 'calves']
-// const equipment = ['barbell', 'dumbbell', 'cable', 'kettlebell', 'bodyweight', 'machine', 'other']
+const muscle = ['hamstrings', 'quadriceps', 'biceps', 'triceps', 'glutes', 'chest', 'core', 'quadriceps', 'back', 'calves']
+const equipment = ['barbell', 'dumbbell', 'cable', 'kettlebell', 'bodyweight', 'machine', 'other']
 const exerciseList = [
     {
         name: 'Squat (Barbell)',
@@ -98,17 +98,25 @@ const exerciseList = [
     }
 ]
 
-export default exerciseList.sort((a, b) => a.name.localeCompare(b.name))
+const sortedExerciseList = exerciseList.sort((a, b) => a.name.localeCompare(b.name));
+
+export { muscle, equipment, sortedExerciseList };
 
 
 //              start workout tab
 // add notes to workout 
+// delete exercise and delete particular set 
+
 // fix "add exercises" button on "edit template" page 
-// get muscle/equipment dropdowns to work properly 
+
+// with muscle/equipment dropdowns on "add exercise" page, display exercise with selected option 
 // get search bar to work
-// fix sticky top (if possible on desktop)
+
 // format data for when workout is saved//in a format that can be used for the history page 
+// format "onchange" on activeworkout page to work, inputted values aren't erased when vising "add exercise page"
 // create hamburger/three dots on templates to edit template = daisyui dropdown 
+// fix sticky top (if possible on desktop)
+
 
 //              exercises page 
 // map over exercise list for exercises page 
