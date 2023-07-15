@@ -104,8 +104,8 @@ export { muscle, equipment, sortedExerciseList };
 
 
 //              start workout tab
-// add notes to workout 
-// delete exercise and delete particular set 
+// add notes to particular exercise 
+// delete particular set (might be exclusive to iPhone app because of swiping motion)
 
 // fix "add exercises" button on "edit template" page 
 

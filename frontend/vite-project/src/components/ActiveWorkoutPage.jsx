@@ -10,27 +10,23 @@ export default function ActiveWorkoutPage({setActivePage, setShowButtons, curren
 
     useEffect(() => {
         const updatedWorkoutData = currentWorkoutExercises.reduce((acc, exercise) => {
-        const exerciseExists = workoutData.some((item) => item.name === exercise);
-
-        if (!exerciseExists) {
-            const newExercise = {
-            name: exercise,
-            sets: [
+            const exerciseExists = workoutData.some((item) => item.name === exercise);
+            if (!exerciseExists) {
+                const newExercise = {
+                name: exercise,
+                sets: [
                 { weight: '50', reps: '10', distance: '0', seconds: '0', notes: '' },
                 { weight: '60', reps: '8', distance: '0', seconds: '0', notes: '' },
             ],};
             return [...acc, newExercise];
-        }
-
-        return acc;
-    }, workoutData);
-
-        const finalWorkoutData = updatedWorkoutData.filter((item) =>
-        currentWorkoutExercises.includes(item.name)
-        );
-
-        setWorkoutData(finalWorkoutData);
+            }
+            return acc;
+        }, workoutData);
+        const draftWorkoutData = updatedWorkoutData.filter((item) =>
+            currentWorkoutExercises.includes(item.name));
+        setWorkoutData(draftWorkoutData);
     }, [currentWorkoutExercises]);
+    
 
     const startOfWorkoutTime = new Date().getHours()
     let currentWorkoutName = ''
@@ -64,19 +60,38 @@ export default function ActiveWorkoutPage({setActivePage, setShowButtons, curren
     }
 
     function addNote() {
-        console.log('add note')
+        // console.log('add note')
+        setWorkoutData((prevData) => {
+            const updatedData = prevData.map((e) => {
+                if (exercise === e.name) {
+                    const updatedNestedArray = [...e.sets, { weight:"60", reps:"8", distance:"0", seconds:"0", notes:"" }];
+                    return { ...e, sets: updatedNestedArray };
+                }
+                return e;
+            });
+            return updatedData;
+        });
     }
 
-    function deleteExercise() {
-        console.log('delete exercise')
-    }
+    function deleteExercise(exercise, index) {
+        setWorkoutData((prevData) => {
+            const updatedData = prevData.map((e) => {
+                if (e.name === exercise) {
+                workoutData.splice(index, 1)
+            } 
+            return e
+        })
+        return updatedData
+        });
 
+        const newTempCurrentExercisesArray = currentWorkoutExercises.filter((item) => item !== exercise);
+        setCurrentWorkoutExercises(newTempCurrentExercisesArray)
+    }
+        
     function updateWeight() {
-
     }
 
     function updateReps() {
-
     }
 
     const addSet = (exercise, event) => {
@@ -96,6 +111,7 @@ export default function ActiveWorkoutPage({setActivePage, setShowButtons, curren
 
     function finishWorkout() {
         console.log('this workout would be saved')
+        // const finalWorkoutData = 
         // {
         // date:"5/14/2012",
         // exerciseName:"One-Arm Dumbbell Row",
@@ -154,12 +170,12 @@ export default function ActiveWorkoutPage({setActivePage, setShowButtons, curren
                             <span>
                                 <details className="dropdown">
                                     <summary className="ml-2 btn font-bold">...</summary>
-                                    <ul className="p-2 shadow menu dropdown-content bg-neutral rounded-box w-52">
+                                    <ul className="p-2 shadow menu dropdown-content bg-neutral rounded-box w-40">
                                         <li>
                                             <button onClick={addNote} className="w-full text-left text-base">Add Note</button>
                                         </li>
                                         <li>
-                                            <button onClick={deleteExercise} className="w-full text-left text-base">Delete Exercise</button>
+                                            <button onClick={(event) => deleteExercise(exercise.name, index)} className="w-full text-left text-base">Delete Exercise</button>
                                         </li>
                                     </ul>
                                 </details>
@@ -187,7 +203,6 @@ export default function ActiveWorkoutPage({setActivePage, setShowButtons, curren
                                                 name="Weight" 
                                                 id="weight" 
                                                 placeholder={row.weight}
-                                                // value='50'
                                                 className="input bg-black rounded-lg w-16 text-center h-8"
                                                 // onChange={updateWeight}
                                             /></td>
@@ -197,9 +212,8 @@ export default function ActiveWorkoutPage({setActivePage, setShowButtons, curren
                                                 name="Reps" 
                                                 id="reps" 
                                                 placeholder={row.reps}
-                                                // value='50'
                                                 className="input bg-black rounded-lg w-16 text-center h-8"
-                                                // onChange={updateReps}
+                                                onChange={updateReps}
                                             /></td>
                                         <td>CM</td>
                                     </tr> 
