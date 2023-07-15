@@ -199,7 +199,7 @@ export default function ActiveWorkoutPage({setActivePage, setShowButtons, curren
                                         <td className="mx-8 h-8 w-28">140x8</td>
                                         <td>
                                             <input 
-                                                type="text" 
+                                                type="number"
                                                 name="Weight" 
                                                 id="weight" 
                                                 placeholder={row.weight}
@@ -208,7 +208,7 @@ export default function ActiveWorkoutPage({setActivePage, setShowButtons, curren
                                             /></td>
                                         <td>
                                             <input 
-                                                type="text" 
+                                                type="number"
                                                 name="Reps" 
                                                 id="reps" 
                                                 placeholder={row.reps}

@@ -1,6 +1,15 @@
 import { muscle, equipment, sortedExerciseList } from '../data';
 
 export default function Exercises() {
+    
+    function muscleSort() {
+        console.log('muscle click for search')
+    }
+
+    function equipmentSort() {
+        console.log('equipment click for search')
+    }
+    
     return(
         <> 
             <div className="flex text-4xl text-center mt-5 mb-3 tracking-wide justify-center items-center">Exercise Page</div>
@@ -16,7 +25,7 @@ export default function Exercises() {
                         <ul tabIndex={0} className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
                             {muscle.map((muscle) => {
                                 return (
-                                    <li><a>{muscle}</a></li>
+                                    <li><a onClick={muscleSort}>{muscle}</a></li>
                                 )
                             })}
                         </ul>
@@ -26,7 +35,7 @@ export default function Exercises() {
                         <ul tabIndex={0} className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
                             {equipment.map((equipment) => {
                                 return (
-                                    <li><a>{equipment}</a></li>
+                                    <li><a onClick={equipmentSort}>{equipment}</a></li>
                                 )
                             })}
                         </ul>

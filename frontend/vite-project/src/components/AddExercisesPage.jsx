@@ -16,6 +16,10 @@ export default function AddExercisePage({setActivePage, setCurrentWorkoutExercis
         }
     }
 
+    function muscleSort() {
+        console.log('muscle click for search')
+    }
+
     function handleForm(e) {
         e.preventDefault() 
         // conditional statements depending on which page needs exercises added (empty workout, edit template, new template) 
@@ -54,7 +58,7 @@ export default function AddExercisePage({setActivePage, setCurrentWorkoutExercis
                         <ul tabIndex={0} className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
                             {muscle.map((muscle) => {
                                 return (
-                                    <li><a>{muscle}</a></li>
+                                    <li><a onClick={muscleSort}>{muscle}</a></li>
                                 )
                             })}
                         </ul>
