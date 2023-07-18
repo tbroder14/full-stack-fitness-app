@@ -2,12 +2,22 @@ import { muscle, equipment, sortedExerciseList } from '../data';
 
 export default function Exercises() {
     
-    function muscleSort() {
+    function muscleSort(event) {
+        event.preventDefault();
+
         console.log('muscle click for search')
     }
 
-    function equipmentSort() {
+    function equipmentSort(event) {
+        event.preventDefault();
+
         console.log('equipment click for search')
+    }
+
+    function muscleClick(event) {
+        event.preventDefault();
+
+        console.log('muscle click')
     }
     
     return(
@@ -25,7 +35,7 @@ export default function Exercises() {
                         <ul tabIndex={0} className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
                             {muscle.map((muscle) => {
                                 return (
-                                    <li><a onClick={muscleSort}>{muscle}</a></li>
+                                    <li><a onClick={(event) => muscleSort(event)}>{muscle}</a></li>
                                 )
                             })}
                         </ul>
@@ -35,7 +45,7 @@ export default function Exercises() {
                         <ul tabIndex={0} className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
                             {equipment.map((equipment) => {
                                 return (
-                                    <li><a onClick={equipmentSort}>{equipment}</a></li>
+                                    <li><a onClick={(event) => muscleSort(event)}>{equipment}</a></li>
                                 )
                             })}
                         </ul>
@@ -48,7 +58,7 @@ export default function Exercises() {
                     return(
                     <div className="my-2 grid h-16 card bg-base-300 px-2" key={index}>
                         <label className="label cursor-pointer">
-                            <button className="label-text">{exercise.name}</button> 
+                            <button className="label-text" onClick={(event) => muscleClick(event)}>{exercise.name}</button> 
                             {/* <input 
                                 // type="checkbox" 
                                 // className="checkbox" 

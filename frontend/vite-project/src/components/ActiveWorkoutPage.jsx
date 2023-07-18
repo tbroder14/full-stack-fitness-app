@@ -94,6 +94,10 @@ export default function ActiveWorkoutPage({setActivePage, setShowButtons, curren
     function updateReps() {
     }
 
+    function checkBoxUpdate() {
+        console.log('box is checked')
+    }
+
     const addSet = (exercise, event) => {
         event.preventDefault();
 
@@ -114,8 +118,8 @@ export default function ActiveWorkoutPage({setActivePage, setShowButtons, curren
         // const finalWorkoutData = 
         // {
         // date:"5/14/2012",
-        // exerciseName:"One-Arm Dumbbell Row",
-        // workoutName:"",
+        // exerciseName:,
+        // workoutName: workoutName,
         // equipment:"",
         // set:[
         //     {weight:"50", reps:"10", distance:"0", seconds:"0", notes:""},
@@ -182,7 +186,7 @@ export default function ActiveWorkoutPage({setActivePage, setShowButtons, curren
                             </span>
                         </div>
                         <form>
-                            <table className="w-full text-center border-separate border-spacing-2">
+                            <table className="w-full text-center ">
                                 <thead>
                                     <tr className="text-center">
                                         <th>Set</th>
@@ -194,28 +198,40 @@ export default function ActiveWorkoutPage({setActivePage, setShowButtons, curren
                                 </thead>
                                 <tbody>
                                     {exercise.sets.map((row, index) =>
-                                    <tr key={index}>
-                                        <td className="bg-black rounded-lg h-8">{index+1}</td>
+                                    <tr key={index} id='set row' className="h-12 input bg-secondary ">
+                                        <td className="bg-black rounded-lg h-8 ">{index+1}</td>
                                         <td className="mx-8 h-8 w-28">140x8</td>
                                         <td>
                                             <input 
                                                 type="number"
                                                 name="Weight" 
                                                 id="weight" 
+                                                min="1"
+                                                max="999"
                                                 placeholder={row.weight}
-                                                className="input bg-black rounded-lg w-16 text-center h-8"
+                                                className="input bg-black rounded-lg w-20 text-center h-8"
                                                 // onChange={updateWeight}
-                                            /></td>
+                                            />
+                                        </td>
                                         <td>
                                             <input 
                                                 type="number"
                                                 name="Reps" 
                                                 id="reps" 
+                                                min="1"
+                                                max="999"
                                                 placeholder={row.reps}
                                                 className="input bg-black rounded-lg w-16 text-center h-8"
                                                 onChange={updateReps}
-                                            /></td>
-                                        <td>CM</td>
+                                            />
+                                        </td>
+                                        <td>
+                                            <input
+                                                type="checkbox"
+                                                className="checkbox"
+                                                onChange={checkBoxUpdate}
+                                            />
+                                        </td>
                                     </tr> 
                                     )}  
                                     <tr>

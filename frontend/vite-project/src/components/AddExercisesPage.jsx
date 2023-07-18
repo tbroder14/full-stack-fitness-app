@@ -58,7 +58,7 @@ export default function AddExercisePage({setActivePage, setCurrentWorkoutExercis
                         <ul tabIndex={0} className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
                             {muscle.map((muscle) => {
                                 return (
-                                    <li><a onClick={muscleSort}>{muscle}</a></li>
+                                    <li><a onClick={(event) => muscleSort(event)}>{muscle}</a></li>
                                 )
                             })}
                         </ul>
