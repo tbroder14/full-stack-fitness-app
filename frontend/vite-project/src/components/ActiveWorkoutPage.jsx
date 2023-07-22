@@ -229,7 +229,7 @@ export default function ActiveWorkoutPage ({ setActivePage, setShowButtons, curr
                     </thead>
                     <tbody>
                       {exercise.sets.map((row, index) =>
-                        <tr key={index} id='set row' className={`h-12 rounded-lg ${isChecked ? '' : 'bg-secondary'}`}>
+                        <tr key={index} id='set row' className={`h-12 rounded-lg ${isChecked ? 'bg-neut ral' : ''}`}>
                           <td className='align-middle'><div className='bg-black rounded-lg h-8 pt-1'>{index + 1}</div></td>
                           <td className='mx-8 h-8 w-36'>140x8</td>
                           <td className=''>

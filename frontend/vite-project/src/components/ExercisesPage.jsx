@@ -5,6 +5,7 @@ export default function Exercises () {
   const [muscleSort, setMuscleSort] = useState(null)
   const [equipmentSort, setEquipmentSort] = useState(null)
   const [filterExerciseList, setFilterExerciseList] = useState(sortedExerciseList)
+  const [searchBarInput, setSearchBarInput] = useState('')
 
   const muscleSelection = (e) => {
     muscleSort === e.muscle ? setMuscleSort(null) : setMuscleSort(e.muscle)
@@ -44,6 +45,17 @@ export default function Exercises () {
     // filteredList.length === 0 ? sortedExerciseList : filteredList
   }, [muscleSort, equipmentSort])
 
+  const searchField = (e) => {
+    setSearchBarInput(e.target.value)
+  }
+
+  useEffect(() => {
+    const filteredList = sortedExerciseList.filter((exercise) =>
+      exercise.name.toLowerCase().includes(searchBarInput.toLowerCase())
+    )
+    setFilterExerciseList(filteredList)
+  }, [searchBarInput])
+
   function exerciseClick (event, exercise) {
     event.preventDefault()
     console.log(exercise + ' would be displayed')
@@ -55,7 +67,7 @@ export default function Exercises () {
       <div className='sticky top-0 pt-2 z-10 bg-base-100'>
         <div className='flex justify-between content-center' />
         <div>
-          <input type='text' placeholder='Search' className='input input-bordered bg-base-300 my-1 w-full max-w-xs' />
+          <input type='text' placeholder='Search' className='input input-bordered bg-base-300 my-1 w-full max-w-xs' value={searchBarInput} onChange={searchField} />
         </div>
         <div className='flex'>
           <details className='dropdown w-full'>

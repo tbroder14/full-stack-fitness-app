@@ -81,8 +81,8 @@ export default function EditCurrentTemplate ({ setActivePage, setShowButtons, al
 
         {activeExercises.map((exercise, index) => {
           return (
-            <ul className='list-disc text-left ml-5 my-2'>
-              <li className='list-disc' key={index} onChange={selectedExercises}>{exercise}</li>
+            <ul className='list-disc text-left ml-5 my-2' key={index}>
+              <li className='list-disc' onChange={selectedExercises}>{exercise}</li>
             </ul>
           )
         })}

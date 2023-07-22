@@ -1,9 +1,23 @@
 const muscleEnums = {
-  barbell: 'barbells',
-  dumbbells: 'dumbbells'
+  barbell: 'barbell',
+  dumbbells: 'dumbbells',
+  cable: 'cable',
+  kettlebell: 'kettlebell',
+  bodyweight: 'bodyweight',
+  machine: 'machine',
+  other: 'other',
+  hamstrings: 'hamstrings',
+  quadriceps: 'quadriceps',
+  biceps: 'biceps',
+  triceps: 'triceps',
+  glutes: 'glutes',
+  chest: 'chest',
+  core: 'core',
+  back: 'back',
+  calves: 'calves'
 }
-const muscle = ['hamstrings', 'quadriceps', 'biceps', 'triceps', 'glutes', 'chest', 'core', 'back', 'calves']
-const equipment = [muscleEnums.barbell, muscleEnums.dumbbells, 'cable', 'kettlebell', 'bodyweight', 'machine', 'other']
+const muscle = [muscleEnums.hamstrings, muscleEnums.quadriceps, muscleEnums.biceps, muscleEnums.triceps, muscleEnums.glutes, muscleEnums.chest, muscleEnums.core, muscleEnums.back, muscleEnums.calves]
+const equipment = [muscleEnums.barbell, muscleEnums.dumbbells, muscleEnums.cable, muscleEnums.kettlebell, muscleEnums.bodyweight, muscleEnums.machine, muscleEnums.other]
 const exerciseList = [
   {
     name: 'Squat (Barbell)',
@@ -61,11 +75,6 @@ const exerciseList = [
     equipment: muscleEnums.barbell
   },
   {
-    name: 'Bicep (Barbell)',
-    muscle: 'biceps',
-    equipment: muscleEnums.barbell
-  },
-  {
     name: 'Lat Pulldown (Cable)',
     muscle: 'back',
     equipment: 'cable'
@@ -113,12 +122,12 @@ export { muscle, equipment, sortedExerciseList }
 
 //              start workout tab
 // add notes to particular exercise
-// delete particular set (might be exclusive to iPhone app because of swiping motion)
+// delete particular set (might be exclusive to iPhone app because of swiping motion
+// fix set complete checkmark
 
 // fix "add exercises" button on "edit template" page
 
-// if a muscle/equipment has no exercises, display something that says "no exercises exist for these options"
-// get search bar to work
+// if a muscle and/or equipment has no exercises, display something that says "no exercises exist for these options"
 
 // format data for when workout is saved//in a format that can be used for the history page
 // format "onchange" on activeworkout page to work, inputted values aren't erased when vising "add exercise page"

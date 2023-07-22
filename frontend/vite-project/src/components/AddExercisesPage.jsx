@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react'
 import { muscle, equipment, sortedExerciseList } from '../data'
-import Exercises from './ExercisesPage'
 
 export default function AddExercisePage ({ setActivePage, setCurrentWorkoutExercises, setOriginalPageForExercises, currentWorkoutExercises, originalPageForExercises }) {
   const [activeExercises, setActiveExercises] = useState(currentWorkoutExercises)
