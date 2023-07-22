@@ -117,7 +117,7 @@ export { muscle, equipment, sortedExerciseList }
 
 // fix "add exercises" button on "edit template" page
 
-// with muscle/equipment dropdowns on "add exercise" page, display exercise with selected option
+// if a muscle/equipment has no exercises, display something that says "no exercises exist for these options"
 // get search bar to work
 
 // format data for when workout is saved//in a format that can be used for the history page
