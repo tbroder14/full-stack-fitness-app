@@ -30,13 +30,14 @@ export default {
 
           'base-100': '#263C50',
 
-          info: '#88CAF6',
+          info: '#1437aa',
 
           success: '#12A189',
 
           warning: '#E29118',
 
           error: '#F42552'
+
         }
       }
     ]

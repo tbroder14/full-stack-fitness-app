@@ -15,46 +15,30 @@ export default function Exercises () {
     equipmentSort === e.equipment ? setEquipmentSort(null) : setEquipmentSort(e.equipment)
   }
 
-  useEffect(() => {
-    const filteringByEquipment = !!equipmentSort
-    const filteringByMuscle = !!muscleSort
-    const filteredList = []
-    sortedExerciseList.forEach(exercise => {
-      if (filteringByEquipment && filteringByMuscle && exercise.muscle === muscleSort && exercise.equipment === equipmentSort) {
-        filteredList.push(exercise)
-      } else if (filteringByEquipment && !filteringByMuscle && exercise.equipment === equipmentSort) {
-        filteredList.push(exercise)
-      } else if (filteringByMuscle && !filteringByEquipment && exercise.muscle === muscleSort) {
-        filteredList.push(exercise)
-        // else if () {
-        // this code will be for when a muscle/equipment search doesn't yield any exercises (don't want to display all exercise)
-        // should probably give a readout that says 'no exercises match your selected search(es)
-        // }
-      }
-    })
-
-    if (filteredList.length === 0 && (filteringByMuscle || filteringByEquipment)) {
-      setFilterExerciseList(0)
-    } else {
-      setFilterExerciseList(sortedExerciseList)
-    }
-    // filteredList = {if (filteredList.length === 0 && filteringByMuscle || filteringByEquipment) {
-    //     return 0
-    // }
-    // if
-    // filteredList.length === 0 ? sortedExerciseList : filteredList
-  }, [muscleSort, equipmentSort])
-
   const searchField = (e) => {
     setSearchBarInput(e.target.value)
   }
 
   useEffect(() => {
-    const filteredList = sortedExerciseList.filter((exercise) =>
-      exercise.name.toLowerCase().includes(searchBarInput.toLowerCase())
-    )
+    let filteredList = sortedExerciseList
+
+    if (equipmentSort) {
+      filteredList = filteredList.filter((exercise) => exercise.equipment === equipmentSort)
+    }
+
+    if (muscleSort) {
+      filteredList = filteredList.filter((exercise) => exercise.muscle === muscleSort)
+    }
+
+    if (searchBarInput !== '') {
+      const searchInputLowerCase = searchBarInput.toLowerCase()
+      filteredList = filteredList.filter((exercise) =>
+        exercise.name.toLowerCase().includes(searchInputLowerCase)
+      )
+    }
+
     setFilterExerciseList(filteredList)
-  }, [searchBarInput])
+  }, [equipmentSort, muscleSort, searchBarInput, sortedExerciseList])
 
   function exerciseClick (event, exercise) {
     event.preventDefault()
@@ -103,8 +87,10 @@ export default function Exercises () {
         </div>
       </div>
       <form>
-
-        {filterExerciseList.map((exercise, index) => {
+        {filterExerciseList.length === 0 ? (
+          <div className='mt-4 text-lg'>No exercise matches your search criteria.</div>
+        ) : (
+        filterExerciseList.map((exercise, index) => {
           return (
             <div className='my-2 grid h-16 card bg-base-300 px-2' key={index}>
               <label className='label cursor-pointer'>
@@ -119,7 +105,7 @@ export default function Exercises () {
               </label>
             </div>
           )
-        })}
+        }))}
         {/* <input type="submit" value="Add Exercises" className="btn btn-primary mt-4 mb-20"/> */}
       </form>
     </>

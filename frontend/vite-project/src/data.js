@@ -122,12 +122,10 @@ export { muscle, equipment, sortedExerciseList }
 
 //              start workout tab
 // add notes to particular exercise
-// delete particular set (might be exclusive to iPhone app because of swiping motion
+// delete particular set (might be exclusive to iPhone app because of swiping motion)
 // fix set complete checkmark
 
 // fix "add exercises" button on "edit template" page
-
-// if a muscle and/or equipment has no exercises, display something that says "no exercises exist for these options"
 
 // format data for when workout is saved//in a format that can be used for the history page
 // format "onchange" on activeworkout page to work, inputted values aren't erased when vising "add exercise page"

@@ -21,6 +21,7 @@ export default function AddExercisePage ({ setActivePage, setCurrentWorkoutExerc
 
   const muscleSelection = (e) => {
     muscleSort === e.muscle ? setMuscleSort(null) : setMuscleSort(e.muscle)
+    console.log(muscleSort)
   }
 
   const equipmentSelection = (e) => {
@@ -28,34 +29,36 @@ export default function AddExercisePage ({ setActivePage, setCurrentWorkoutExerc
   }
 
   useEffect(() => {
-    const filteringByEquipment = !!equipmentSort
-    const filteringByMuscle = !!muscleSort
-    let filteredList = []
-    sortedExerciseList.forEach(exercise => {
-      if (filteringByEquipment && filteringByMuscle && exercise.muscle === muscleSort && exercise.equipment === equipmentSort) {
-        filteredList.push(exercise)
-      } else if (filteringByEquipment && !filteringByMuscle && exercise.equipment === equipmentSort) {
-        filteredList.push(exercise)
-      } else if (filteringByMuscle && !filteringByEquipment && exercise.muscle === muscleSort) {
-        filteredList.push(exercise)
-      }
-    })
+    let filteredList = sortedExerciseList
 
-    filteredList = filteredList.length === 0 ? sortedExerciseList : filteredList
+    if (equipmentSort) {
+      filteredList = filteredList.filter((exercise) => exercise.equipment === equipmentSort)
+    }
+
+    if (muscleSort) {
+      filteredList = filteredList.filter((exercise) => exercise.muscle === muscleSort)
+    }
+
+    if (searchBarInput !== '') {
+      const searchInputLowerCase = searchBarInput.toLowerCase()
+      filteredList = filteredList.filter((exercise) =>
+        exercise.name.toLowerCase().includes(searchInputLowerCase)
+      )
+    }
 
     setFilterExerciseList(filteredList)
-  }, [muscleSort, equipmentSort])
+  }, [equipmentSort, muscleSort, searchBarInput, sortedExerciseList])
 
   const searchField = (e) => {
     setSearchBarInput(e.target.value)
   }
 
-  useEffect(() => {
-    const filteredList = sortedExerciseList.filter((exercise) =>
-      exercise.name.toLowerCase().includes(searchBarInput.toLowerCase())
-    )
-    setFilterExerciseList(filteredList)
-  }, [searchBarInput])
+  //   useEffect(() => {
+  //     const filteredList = sortedExerciseList.filter((exercise) =>
+  //       exercise.name.toLowerCase().includes(searchBarInput.toLowerCase())
+  //     )
+  //     setFilterExerciseList(filteredList)
+  //   }, [searchBarInput])
 
   // if (originalPageForExercises === 'NewTemplate') {
   // }
@@ -125,23 +128,26 @@ export default function AddExercisePage ({ setActivePage, setCurrentWorkoutExerc
         </div>
       </div>
       <form onSubmit={handleForm}>
-
-        {filterExerciseList.map((exercise) => {
-          return (
-            <div className='form-control my-2 grid h-16 card bg-base-300 px-2' key={exercise.name}>
-              <label className='label cursor-pointer'>
-                <span className='label-text'>{exercise.name}</span>
-                <input
-                  type='checkbox'
-                  className='checkbox'
-                  value={exercise.name}
-                  checked={activeExercises.includes(exercise.name)}
-                  onChange={selectedExercises}
-                />
-              </label>
-            </div>
-          )
-        })}
+        {filterExerciseList.length === 0 ? (
+          <div className='mt-4 text-lg'>No exercise matches your search criteria.</div>
+        ) : (
+        // Render the filtered list
+          filterExerciseList.map((exercise) => {
+            return (
+              <div className='form-control my-2 grid h-16 card bg-base-300 px-2' key={exercise.name}>
+                <label className='label cursor-pointer'>
+                  <span className='label-text'>{exercise.name}</span>
+                  <input
+                    type='checkbox'
+                    className='checkbox'
+                    value={exercise.name}
+                    checked={activeExercises.includes(exercise.name)}
+                    onChange={selectedExercises}
+                  />
+                </label>
+              </div>
+            )
+          }))}
         <input type='submit' value='Add Exercises' className='btn btn-primary mt-4 mb-20' />
       </form>
     </>
