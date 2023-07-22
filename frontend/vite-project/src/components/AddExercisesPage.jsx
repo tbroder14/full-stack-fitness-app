@@ -1,11 +1,13 @@
 import { useState, useEffect } from 'react'
 import { muscle, equipment, sortedExerciseList } from '../data'
+import Exercises from './ExercisesPage'
 
 export default function AddExercisePage ({ setActivePage, setCurrentWorkoutExercises, setOriginalPageForExercises, currentWorkoutExercises, originalPageForExercises }) {
   const [activeExercises, setActiveExercises] = useState(currentWorkoutExercises)
   const [muscleSort, setMuscleSort] = useState(null)
   const [equipmentSort, setEquipmentSort] = useState(null)
   const [filterExerciseList, setFilterExerciseList] = useState(sortedExerciseList)
+  const [searchBarInput, setSearchBarInput] = useState('')
 
   const selectedExercises = (e) => {
     if (activeExercises.includes(e.target.value)) {
@@ -45,6 +47,20 @@ export default function AddExercisePage ({ setActivePage, setCurrentWorkoutExerc
     setFilterExerciseList(filteredList)
   }, [muscleSort, equipmentSort])
 
+  const searchField = (e) => {
+    setSearchBarInput(e.target.value)
+  }
+
+  useEffect(() => {
+    const filteredList = sortedExerciseList.filter((exercise) =>
+      exercise.name.toLowerCase().includes(searchBarInput.toLowerCase())
+    )
+    setFilterExerciseList(filteredList)
+  }, [searchBarInput])
+
+  // if (originalPageForExercises === 'NewTemplate') {
+  // }
+
   function handleForm (e) {
     e.preventDefault()
     // conditional statements depending on which page needs exercises added (empty workout, edit template, new template)
@@ -74,7 +90,7 @@ export default function AddExercisePage ({ setActivePage, setCurrentWorkoutExerc
           <div className='btn' onClick={handleForm}>Add</div>
         </div>
         <div>
-          <input type='text' placeholder='Search' className='input input-bordered bg-base-300 my-1 w-full max-w-xs' />
+          <input type='text' placeholder='Search' className='input input-bordered bg-base-300 my-1 w-full max-w-xs' value={searchBarInput} onChange={searchField} />
         </div>
         <div className='flex'>
           <details className='dropdown w-full'>
