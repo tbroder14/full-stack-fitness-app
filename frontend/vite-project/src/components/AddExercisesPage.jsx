@@ -53,13 +53,6 @@ export default function AddExercisePage ({ setActivePage, setCurrentWorkoutExerc
     setSearchBarInput(e.target.value)
   }
 
-  //   useEffect(() => {
-  //     const filteredList = sortedExerciseList.filter((exercise) =>
-  //       exercise.name.toLowerCase().includes(searchBarInput.toLowerCase())
-  //     )
-  //     setFilterExerciseList(filteredList)
-  //   }, [searchBarInput])
-
   // if (originalPageForExercises === 'NewTemplate') {
   // }
 

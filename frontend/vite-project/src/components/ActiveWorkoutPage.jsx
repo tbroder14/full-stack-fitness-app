@@ -14,8 +14,8 @@ export default function ActiveWorkoutPage ({ setActivePage, setShowButtons, curr
         const newExercise = {
           name: exercise,
           sets: [
-            { weight: '50', reps: '10', distance: '0', seconds: '0', notes: '' },
-            { weight: '60', reps: '8', distance: '0', seconds: '0', notes: '' }
+            { weight: '50', reps: '10', distance: '0', seconds: '0', notes: '', complete: false },
+            { weight: '60', reps: '8', distance: '0', seconds: '0', notes: '', complete: false }
           ]
         }
         return [...acc, newExercise]
@@ -117,10 +117,39 @@ export default function ActiveWorkoutPage ({ setActivePage, setShowButtons, curr
   //     console.log('box is checked')
   //   }
 
-  const [isChecked, setIsChecked] = useState(false)
+  const handleCheckboxChange = (exercise, index) => {
+    const exerciseName = exercise.name
+    const setIndex = index
 
-  const handleCheckboxChange = (event) => {
-    setIsChecked(event.target.checked)
+    setWorkoutData((prevData) => {
+      const updatedData = prevData.map((e) => {
+        if (exerciseName === e.name && e.sets[setIndex].complete === false) {
+          const updatedSets = exercise.sets.map((set, index) => {
+            if (index === setIndex) {
+              return { ...set, complete: true }
+            }
+            return set
+          })
+          return {
+            ...exercise,
+            sets: updatedSets
+          }
+        } else if (exerciseName === e.name && e.sets[setIndex].complete === true) {
+          const updatedSets = exercise.sets.map((set, index) => {
+            if (index === setIndex) {
+              return { ...set, complete: false }
+            }
+            return set
+          })
+          return {
+            ...exercise,
+            sets: updatedSets
+          }
+        }
+        return e
+      })
+      return updatedData
+    })
   }
 
   const addSet = (exercise, event) => {
@@ -129,7 +158,7 @@ export default function ActiveWorkoutPage ({ setActivePage, setShowButtons, curr
     setWorkoutData((prevData) => {
       const updatedData = prevData.map((e) => {
         if (exercise === e.name) {
-          const updatedNestedArray = [...e.sets, { weight: '60', reps: '8', distance: '0', seconds: '0', notes: '' }]
+          const updatedNestedArray = [...e.sets, { weight: '60', reps: '8', distance: '0', seconds: '0', notes: '', complete: false }]
           return { ...e, sets: updatedNestedArray }
         }
         return e
@@ -224,12 +253,12 @@ export default function ActiveWorkoutPage ({ setActivePage, setShowButtons, curr
                         <th>Previous</th>
                         <th className='w-16 m-0'>lbs</th>
                         <th>Reps</th>
-                        <th className='text-left'>CM</th>
+                        <th className='text-2xl'>&#10003;</th>
                       </tr>
                     </thead>
                     <tbody>
                       {exercise.sets.map((row, index) =>
-                        <tr key={index} id='set row' className={`h-12 rounded-lg ${isChecked ? 'bg-info' : ''}`}>
+                        <tr key={index} id='set row' className={`h-12 rounded-lg ${row.complete ? 'bg-info' : ''}`}>
                           <td className='align-middle'><div className='bg-black rounded-lg h-8 pt-1'>{index + 1}</div></td>
                           <td className='mx-8 h-8 w-36'>140x8</td>
                           <td className=''>
@@ -259,8 +288,9 @@ export default function ActiveWorkoutPage ({ setActivePage, setShowButtons, curr
                             <input
                               type='checkbox'
                               className='checkbox'
-                              checked={isChecked}
-                              onChange={handleCheckboxChange}
+                              checked={row.complete}
+                              // checked={false}
+                              onChange={() => handleCheckboxChange(exercise, index)}
                             />
                           </td>
                         </tr>

@@ -30,7 +30,7 @@ export default {
 
           'base-100': '#263C50',
 
-          info: '#1437aa',
+          info: '#1f7d2c',
 
           success: '#12A189',
 

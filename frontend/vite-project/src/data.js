@@ -123,7 +123,6 @@ export { muscle, equipment, sortedExerciseList }
 //              start workout tab
 // add notes to particular exercise
 // delete particular set (might be exclusive to iPhone app because of swiping motion)
-// fix set complete checkmark
 
 // fix "add exercises" button on "edit template" page
 
